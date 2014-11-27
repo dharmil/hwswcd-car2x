@@ -41,10 +41,10 @@
 #define OPMODE_EMERGENCYSTOP_MAXSPEED (0u)
 
 //camera ip
-#define VCIPPart1 10
-#define VCIPPart2 10
-#define VCIPPart3 100
-#define VCIPPart4 110
+#define VCIPPart1 192
+#define VCIPPart2 168
+#define VCIPPart3 0
+#define VCIPPart4 150
 
 /* ===================================================================
  * Enums

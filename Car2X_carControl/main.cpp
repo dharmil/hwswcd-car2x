@@ -37,18 +37,19 @@ int main()
 		// print some diagnostics information
 		int speed = state.motorEcus[0].iCurrentSpeed + state.motorEcus[1].iCurrentSpeed + state.motorEcus[2].iCurrentSpeed + state.motorEcus[3].iCurrentSpeed;
 
-		LOG_DEBUG("\rSpeedX: %+5d mm/s, OpMode: %#x ", speed, state.currMode);
+		//LOG_DEBUG("\rSpeedX: %+5d mm/s, OpMode: %#x ", speed, state.currMode);
 		//LOG_DEBUG("yippee!");
 
 		// perform state switch if requested.
 		if(state.reqMode != state.currMode)
 		{
+			LOG_DEBUG("yippee!");
 			switchState(&state);
 		}
 		state.counterCarControl=state.counterComm;
 
 		setMotorSpeeds(&state);
-
+		LOG_DEBUG("After set!");
 		if(state.currMode==OPMODE_MANUDRIVE){
 			state.ip1=state.reqip1;
 			state.ip2=state.reqip2;
@@ -65,7 +66,7 @@ int main()
 
 		// TODO: write a delay function w/ timer. Otherwise we might run into problems blocking the mutex from all the shared memory reads...
 		//delay(10);
-		for (int i = 0; i < 10000; i++) {;}
+		for (int i = 0; i < 15000; i++) {;}
 	}
 
 	return -1;
@@ -109,7 +110,7 @@ void switchState(CarState * state)
 		break;
 	}
 	}
-
+	LOG_DEBUG("FC Bayern For the win!");
 	state->currMode = state->reqMode;
 }
 
@@ -125,11 +126,11 @@ void setMotorSpeeds(CarState * state)
 			+ state->motorEcus[2].iCurrentSpeed
 			+ state->motorEcus[3].iCurrentSpeed) / 4;
 
-	LOG_DEBUG("Current velocity: %+5d, LF: %+3hd, LR: %+3hd, RF: %+3hd, RR: %+3hd",
-			iCurrVel, state->motorEcus[0].iCurrentSpeed, state->motorEcus[1].iCurrentSpeed,
-			state->motorEcus[2].iCurrentSpeed, state->motorEcus[3].iCurrentSpeed);
+	//LOG_DEBUG("Current velocity: %+5d, LF: %+3hd, LR: %+3hd, RF: %+3hd, RR: %+3hd",
+			//iCurrVel, state->motorEcus[0].iCurrentSpeed, state->motorEcus[1].iCurrentSpeed,
+			//state->motorEcus[2].iCurrentSpeed, state->motorEcus[3].iCurrentSpeed);
 	//LOG current PIController values
-	LOG_DEBUG("LF: %hd, %hd, %hd LR: %hd, %hd, %hd RF: %hd, %hd, %hd RR: %hd, %hd, %hd",state->motorEcus[0].iIType,state->motorEcus[0].iPType,state->motorEcus[0].iMaxSpeed,state->motorEcus[1].iIType,state->motorEcus[1].iPType,state->motorEcus[1].iMaxSpeed,state->motorEcus[2].iIType,state->motorEcus[2].iPType,state->motorEcus[2].iMaxSpeed,state->motorEcus[3].iIType,state->motorEcus[3].iPType,state->motorEcus[3].iMaxSpeed);
+	//LOG_DEBUG("LF: %hd, %hd, %hd LR: %hd, %hd, %hd RF: %hd, %hd, %hd RR: %hd, %hd, %hd",state->motorEcus[0].iIType,state->motorEcus[0].iPType,state->motorEcus[0].iMaxSpeed,state->motorEcus[1].iIType,state->motorEcus[1].iPType,state->motorEcus[1].iMaxSpeed,state->motorEcus[2].iIType,state->motorEcus[2].iPType,state->motorEcus[2].iMaxSpeed,state->motorEcus[3].iIType,state->motorEcus[3].iPType,state->motorEcus[3].iMaxSpeed);
 
 	// Calculate individual wheel speeds
 	iReqVel = (state->reqVelocity.iFrontLeft
@@ -137,9 +138,9 @@ void setMotorSpeeds(CarState * state)
 			+ state->reqVelocity.iRearLeft
 			+ state->reqVelocity.iRearRight) / 4;
 
-	LOG_DEBUG("Request velocity: %+5hd, LF: %+3hd, LR: %+3hd, RF: %+3hd, RR: %+3hd",
-			iReqVel, state->reqVelocity.iFrontLeft, state->reqVelocity.iRearLeft,
-			state->reqVelocity.iFrontRight, state->reqVelocity.iRearRight);
+//	LOG_DEBUG("Request velocity: %+5hd, LF: %+3hd, LR: %+3hd, RF: %+3hd, RR: %+3hd",
+//			iReqVel, state->reqVelocity.iFrontLeft, state->reqVelocity.iRearLeft,
+//			state->reqVelocity.iFrontRight, state->reqVelocity.iRearRight);
 
 	if(abs(iReqVel) > abs(state->iMaxSpeed))
 	{

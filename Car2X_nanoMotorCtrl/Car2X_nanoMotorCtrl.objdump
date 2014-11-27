@@ -12771,7 +12771,7 @@ void CCarProtocol::parsePacket(alt_u8 *pPacket, int iLength) {
  2007f34:	10800017 	ldw	r2,0(r2)
  2007f38:	1000683a 	jmp	r2
  2007f3c:	02008b24 	muli	r8,zero,556
- 2007f40:	020080c0 	call	20080c <__reset-0x1dff7f4>
+ 2007f40:	020080c0 	call	20080c <__alt_mem_sdram-0x1dff7f4>
  2007f44:	02008b24 	muli	r8,zero,556
  2007f48:	02008b24 	muli	r8,zero,556
  2007f4c:	02008188 	cmpgei	r8,zero,518
@@ -17150,10 +17150,10 @@ CWelcomeMessage::CWelcomeMessage(alt_u8 *pMessage, int iLength)
  200b3e8:	0200b4e4 	muli	r8,zero,723
  200b3ec:	0200b450 	cmplti	r8,zero,721
  200b3f0:	0200b4a8 	cmpgeui	r8,zero,722
- 200b3f4:	0200b3c0 	call	200b3c <__reset-0x1dff4c4>
- 200b3f8:	0200b3c0 	call	200b3c <__reset-0x1dff4c4>
- 200b3fc:	0200b3c0 	call	200b3c <__reset-0x1dff4c4>
- 200b400:	0200b3c0 	call	200b3c <__reset-0x1dff4c4>
+ 200b3f4:	0200b3c0 	call	200b3c <__alt_mem_sdram-0x1dff4c4>
+ 200b3f8:	0200b3c0 	call	200b3c <__alt_mem_sdram-0x1dff4c4>
+ 200b3fc:	0200b3c0 	call	200b3c <__alt_mem_sdram-0x1dff4c4>
+ 200b400:	0200b3c0 	call	200b3c <__alt_mem_sdram-0x1dff4c4>
  200b404:	0200b520 	cmpeqi	r8,zero,724
  200b408:	0200b4fc 	xorhi	r8,zero,723
  200b40c:	0200b450 	cmplti	r8,zero,721
@@ -20576,7 +20576,7 @@ CWelcomeMessage::CWelcomeMessage(alt_u8 *pMessage, int iLength)
  200e640:	10c5883a 	add	r2,r2,r3
  200e644:	11000017 	ldw	r4,0(r2)
  200e648:	2000683a 	jmp	r4
- 200e64c:	0200f5c0 	call	200f5c <__reset-0x1dff0a4>
+ 200e64c:	0200f5c0 	call	200f5c <__alt_mem_sdram-0x1dff0a4>
  200e650:	0200e7b0 	cmpltui	r8,zero,926
  200e654:	0200e7b0 	cmpltui	r8,zero,926
  200e658:	0200f5ac 	andhi	r8,zero,982
@@ -22823,7 +22823,7 @@ CWelcomeMessage::CWelcomeMessage(alt_u8 *pMessage, int iLength)
  201093c:	02010a24 	muli	r8,zero,1064
  2010940:	02011424 	muli	r8,zero,1104
  2010944:	020113fc 	xorhi	r8,zero,1103
- 2010948:	02011440 	call	201144 <__reset-0x1dfeebc>
+ 2010948:	02011440 	call	201144 <__alt_mem_sdram-0x1dfeebc>
  201094c:	0201144c 	andi	r8,zero,1105
  2010950:	d9002717 	ldw	r4,156(sp)
  2010954:	0089c3c4 	movi	r2,9999
@@ -37052,89 +37052,89 @@ int alt_get_fd (alt_dev* dev)
  201b69c:	883fb21e 	bne	r17,zero,201b568 <__call_exitprocs+0x74>
  201b6a0:	003fc006 	br	201b5a4 <__call_exitprocs+0xb0>
  201b6a4:	0401ffff 	0x401ffff
- 201b6a8:	00010000 	call	1000 <__reset-0x1fff000>
+ 201b6a8:	00010000 	call	1000 <__alt_mem_sdram-0x1fff000>
  201b6ac:	0201ffff 	0x201ffff
  201b6b0:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b6b4:	00000601 	jmpi	60 <__reset-0x1ffffa0>
- 201b6b8:	00020001 	jmpi	2000 <__reset-0x1ffe000>
+ 201b6b4:	00000601 	jmpi	60 <__alt_mem_sdram-0x1ffffa0>
+ 201b6b8:	00020001 	jmpi	2000 <__alt_mem_sdram-0x1ffe000>
  201b6bc:	0201ffff 	0x201ffff
  201b6c0:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b6c4:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b6c4:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b6c8:	0201ffff 	0x201ffff
  201b6cc:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b6d0:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b6d0:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b6d4:	0201ffff 	0x201ffff
  201b6d8:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b6dc:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b6dc:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b6e0:	0201ffff 	0x201ffff
  201b6e4:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b6e8:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b6e8:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b6ec:	0201ffff 	0x201ffff
  201b6f0:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b6f4:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b6f4:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b6f8:	0201ffff 	0x201ffff
  201b6fc:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b700:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b700:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b704:	0201ffff 	0x201ffff
  201b708:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b70c:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b70c:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b710:	0201ffff 	0x201ffff
  201b714:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b718:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b718:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b71c:	0201ffff 	0x201ffff
  201b720:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b724:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b724:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b728:	0201ffff 	0x201ffff
  201b72c:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b730:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b730:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b734:	0201ffff 	0x201ffff
  201b738:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b73c:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b73c:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b740:	0201ffff 	0x201ffff
  201b744:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b748:	00001801 	jmpi	180 <__reset-0x1fffe80>
- 201b74c:	00020001 	jmpi	2000 <__reset-0x1ffe000>
+ 201b748:	00001801 	jmpi	180 <__alt_mem_sdram-0x1fffe80>
+ 201b74c:	00020001 	jmpi	2000 <__alt_mem_sdram-0x1ffe000>
  201b750:	00040003 	ldbu	zero,4096(zero)
  201b754:	00060005 	stb	zero,6144(zero)
  201b758:	00080007 	ldb	zero,8192(zero)
  201b75c:	000a0009 	0xa0009
  201b760:	ffff000b 	ldhu	ra,-1024(ra)
- 201b764:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b764:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b768:	0201ffff 	0x201ffff
  201b76c:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b770:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b770:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b774:	0201ffff 	0x201ffff
  201b778:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b77c:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b77c:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b780:	0201ffff 	0x201ffff
  201b784:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b788:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b788:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b78c:	0201ffff 	0x201ffff
  201b790:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b794:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b794:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b798:	0201ffff 	0x201ffff
  201b79c:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b7a0:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b7a0:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b7a4:	0201ffff 	0x201ffff
  201b7a8:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b7ac:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b7ac:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b7b0:	0201ffff 	0x201ffff
  201b7b4:	ffff0000 	call	ffff000 <__alt_data_end+0xbfff000>
- 201b7b8:	00000201 	jmpi	20 <__reset-0x1ffffe0>
+ 201b7b8:	00000201 	jmpi	20 <__alt_mem_sdram-0x1ffffe0>
  201b7bc:	0201ffff 	0x201ffff
  201b7c0:	883a0000 	call	883a000 <__alt_data_end+0x483a000>
  201b7c4:	010d0bff 	0x10d0bff
  201b7c8:	01000004 	movi	r4,0
- 201b7cc:	00000101 	jmpi	10 <__reset-0x1fffff0>
- 201b7d0:	00000000 	call	0 <__reset-0x2000000>
+ 201b7cc:	00000101 	jmpi	10 <__alt_mem_sdram-0x1fffff0>
+ 201b7d0:	00000000 	call	0 <__alt_mem_sdram-0x2000000>
  201b7d4:	010d0bff 	0x10d0bff
  201b7d8:	01000004 	movi	r4,0
- 201b7dc:	00000101 	jmpi	10 <__reset-0x1fffff0>
- 201b7e0:	00000000 	call	0 <__reset-0x2000000>
+ 201b7dc:	00000101 	jmpi	10 <__alt_mem_sdram-0x1fffff0>
+ 201b7e0:	00000000 	call	0 <__alt_mem_sdram-0x2000000>
  201b7e4:	010d0bff 	0x10d0bff
  201b7e8:	01000004 	movi	r4,0
- 201b7ec:	00000101 	jmpi	10 <__reset-0x1fffff0>
- 201b7f0:	00000000 	call	0 <__reset-0x2000000>
+ 201b7ec:	00000101 	jmpi	10 <__alt_mem_sdram-0x1fffff0>
+ 201b7f0:	00000000 	call	0 <__alt_mem_sdram-0x2000000>
  201b7f4:	01090bff 	0x1090bff
  201b7f8:	7f010002 	0x7f010002
 	...
@@ -37143,7 +37143,7 @@ int alt_get_fd (alt_dev* dev)
 	...
  201b814:	010d0bff 	0x10d0bff
  201b818:	7f010002 	0x7f010002
- 201b81c:	00000000 	call	0 <__reset-0x2000000>
- 201b820:	0201bd40 	call	201bd4 <__reset-0x1dfe42c>
- 201b824:	00000001 	jmpi	0 <__reset-0x2000000>
+ 201b81c:	00000000 	call	0 <__alt_mem_sdram-0x2000000>
+ 201b820:	0201bd40 	call	201bd4 <__alt_mem_sdram-0x1dfe42c>
+ 201b824:	00000001 	jmpi	0 <__alt_mem_sdram-0x2000000>
  201b828:	0201b4f0 	cmpltui	r8,zero,1747

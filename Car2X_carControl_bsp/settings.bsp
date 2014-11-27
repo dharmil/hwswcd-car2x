@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>17.11.2014 12:24:32</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1416223472509</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>27.11.2014 21:10:55</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1417119055104</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\ZXSpectrum\Desktop\Car2X-master\Car2X-master\software\Car2X_carControl_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\hardware\nios_system.sopcinfo</SopcDesignFile>

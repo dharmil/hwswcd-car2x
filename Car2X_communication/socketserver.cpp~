@@ -60,7 +60,7 @@ extern "C" {
 #define IP_WHEEL_RF     "192.168.0.11"
 #define IP_WHEEL_RR     "192.168.0.13"
 #define IP_ULTRASOUND   "192.168.0.20"
-#define IP_CAMERA       "192.168.0.150" //was 110
+#define IP_CAMERA       "192.168.0.150"
 
 //WelcomeMsg handler
 CWelcomeMessage * wheel_LF = NULL;
