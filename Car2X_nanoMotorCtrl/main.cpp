@@ -12,10 +12,13 @@
 
 int main (void)
 {
+
+
 	bool ret;
 	alt_u16 state = 0; // State to distinguish between the small cycles
 	CCarMessage *pCurrentMessage = 0; // The current message
-	//LOG_DEBUG("init");
+	LOG_DEBUG("init");
+	//printf("init");
 	if(!init())
 	{
 		goto fail;
@@ -23,20 +26,20 @@ int main (void)
 
 	*pLED = 0xAA;
 
-	//LOG_DEBUG("wait");
+	LOG_DEBUG("wait");
 	ret = sendWelcome();
 	if(!ret) {
 		goto fail;
 	}
 	*pLED = 0;
 
-	//LOG_DEBUG("setuppid");
+	LOG_DEBUG("setuppid");
 	ret = setUpPIController();
 	if(!ret)
 	{
 		goto fail;
 	}
-	//LOG_DEBUG("after setuppid");
+	LOG_DEBUG("after setuppid");
 
 
 	// Restore speed = 0
@@ -45,51 +48,59 @@ int main (void)
 	setSpeed(0);
 
 	// Set timer and start it
-	alt_u32 (*callback) (void*);
-	callback = alarm_callback;
-	alt_alarm_start(&alarm, 10, callback, 0);
+	//alt_u32 (*callback) (void*);
+	//callback = alarm_callback;
+	//alt_alarm_start(&alarm, 10, callback, 0);
 
 	// Small cycle:
 	while(true)
 	{
-		if(!waitForEndOfCycle())
+		delay(500);
+		if(!waitForNextPacket())
 			goto fail;
+		//if(!waitForEndOfCycle())//	Alter Code, welcher noch zeitbasiert war. Die zeitbasierte Variante wurde fallengelassen, da das Cyclone 4 Board nicht zeitbasiert ist und eine Synchronisation aufgrund der Beschränkungen seitens des Kommunikationsnetzwerks de facto unmöglich erscheint
+		//	goto fail;
 		//LOG_DEBUG("EndofCycle");
 		if(!controlSpeed())
 			goto fail;
-		//LOG_DEBUG("controlSpeed");
-		if(state >= 9)
-		{
-			if(!waitForNextPacket())
-				goto fail;
-			state = 0;
-			//LOG_DEBUG("NextPacket");
-		}
-		else
-		{
+		LOG_DEBUG("controlSpeed");
+		//if(state >= 9)
+		//{
+		//	if(!waitForNextPacket())
+		//		goto fail;
+		//	state = 0;
+		//	LOG_DEBUG("NextPacket");
+		//}
+
+		//else
+		//{
 			// Get current message and call doAction()
-			if(pProtocol != 0 && pProtocol->isValid() && state < pProtocol->getMessageCount())
-			{
+		for (state = 0; pProtocol != 0 && pProtocol->isValid() && state < pProtocol->getMessageCount(); state++)	{
+		//if(pProtocol != 0 && pProtocol->isValid() && state < pProtocol->getMessageCount())
+		//	{
 				alt_u32 count = pProtocol->getMessageCount();
 				count = count - state - 1;
 				pCurrentMessage = 0;
 				pCurrentMessage = pProtocol->getNthMessage(count);
-				//LOG_DEBUG("getNthMessage");
+				LOG_DEBUG("getNthMessage");
 				if(pCurrentMessage != 0 && pCurrentMessage->isValid())
 					pCurrentMessage->doAction();
-				//LOG_DEBUG("doAction");
+				LOG_DEBUG("doAction");
+
 			}
-			state++;
+			//state++;	//Ebenfalls Teil des veralteten Codes
 		}
-	}
+
+
 
 // Label for failure
 fail:
-	//LOG_DEBUG("fail");
+	LOG_DEBUG("fail");
 	setSpeed(0);
 	*pLED = 0x80;
 	delay(10000);
 	return -1;
+
 }
 
 
@@ -117,7 +128,7 @@ bool init()
 
 bool sendWelcome()
 {
-	//LOG_DEBUG("wait entry");
+	LOG_DEBUG("wait entry");
 
 	CCarMessage * pMessage = 0;
 	alt_u32 uiTries = 0;         // Counts the tries, if >= 5 return
@@ -127,16 +138,16 @@ bool sendWelcome()
 	bool success;
 
 	// Prepare welcome message
-	//LOG_DEBUG("allocate msg");
+	LOG_DEBUG("allocate msg");
 
 	// set led on
 	*pLED |= 0x01;
 
-	//LOG_DEBUG("pre while");
+	LOG_DEBUG("pre while");
 
 	while(true)
 	{
-		//LOG_DEBUG("loop %d",  (int) uiTries);
+		LOG_DEBUG("loop %d",  (int) uiTries);
 
 		// Put the WelcomeMessage into the protocol wrapper.
 		if(pProtocol) {
@@ -148,8 +159,8 @@ bool sendWelcome()
 		pProtocol->getBytes(cBuffer);
 
 		//LOG_DEBUG("cBuffer: '%c%c%c%c' 0x%02X%02X%02X%02X 0x%02X%02X%02X%02X", cBuffer[0], cBuffer[1],
-				//cBuffer[2], cBuffer[3], cBuffer[4], cBuffer[5], cBuffer[6], cBuffer[7],
-				//cBuffer[8], cBuffer[9], cBuffer[10], cBuffer[11]);
+			//	cBuffer[2], cBuffer[3], cBuffer[4], cBuffer[5], cBuffer[6], cBuffer[7],
+			//	cBuffer[8], cBuffer[9], cBuffer[10], cBuffer[11]);
 
 		// Send out the packet.
 		if(uiTries % 50 == 0)
@@ -177,7 +188,7 @@ bool sendWelcome()
 		// Was the protocol generation unsuccessful then count one more try and continue
 		if(pProtocol == 0 || !pProtocol->isValid() || pProtocol->getMessageCount() < 1u)
 		{
-			printf("invalid packet pProtocol %u isValid %d messageCount %1u\n", pProtocol, !pProtocol->isValid(), pProtocol->getMessageCount());
+			//printf("invalid packet pProtocol %u isValid %d messageCount %1u\n", pProtocol, !pProtocol->isValid(), pProtocol->getMessageCount());
 			uiTries++;
 			continue;
 		}
@@ -186,7 +197,7 @@ bool sendWelcome()
 		pMessage = pProtocol->getNthMessage(0);
 		if(pMessage->isValid() && pMessage->getType() == 0x01)
 		{
-			//LOG_DEBUG("valid message");
+			LOG_DEBUG("valid message");
 			*pLED &= 0xFE;
 			if(pProtocol) {
 				delete(pProtocol);
@@ -207,12 +218,13 @@ bool controlSpeed()
 	alt_32 iNextSpeed = 0;
 
 	// Finish running speed measurement
-	iCurrentSpeed = measureSpeedUnblocking();
+	iCurrentSpeed = measureSpeed();
+
 	// Call PI-Controller with speed error
 	iNextSpeed = pController->control(iDesiredSpeed - iCurrentSpeed);
 	// Set new speed
-	setSpeed(iNextSpeed);
-	//LOG_DEBUG("iNextSpeed: %hd iCurrentSpeed: %hd",iNextSpeed,iCurrentSpeed);
+	setSpeed(iNextSpeed + iCurrentSpeed);
+	LOG_DEBUG("iNextSpeed: %hd iCurrentSpeed: %hd",iNextSpeed,iCurrentSpeed);
 
 	// Is there a VelocityMessage then set the current speed as an answer
 	if(pProtocol != 0 && pProtocol->isValid() && pProtocol->getMessageCount() > 0)
@@ -242,9 +254,9 @@ bool waitForNextPacket()
 
 		pNewProtocol = new CCarProtocol(cBuffer, uiReceivedCount);
 
-		//LOG_DEBUG("cBuffer: '%c%c%c%c' 0x%0X%0X%0X%0X 0x%0X%0X%0X%0X", cBuffer[0], cBuffer[1],
-				//cBuffer[2], cBuffer[3], cBuffer[4], cBuffer[5], cBuffer[6], cBuffer[7],
-				//cBuffer[8], cBuffer[9], cBuffer[10], cBuffer[11]);
+		LOG_DEBUG("cBuffer: '%c%c%c%c' 0x%0X%0X%0X%0X 0x%0X%0X%0X%0X", cBuffer[0], cBuffer[1],
+				cBuffer[2], cBuffer[3], cBuffer[4], cBuffer[5], cBuffer[6], cBuffer[7],
+				cBuffer[8], cBuffer[9], cBuffer[10], cBuffer[11]);
 
 		// Is there a VelocityMessage then set the desired speed along with the message
 		if(pNewProtocol != 0 && pNewProtocol->isValid() && pNewProtocol->getMessageCount() > 0)
@@ -260,7 +272,7 @@ bool waitForNextPacket()
 	{
 		*pLED = *pLED | 0x10;
 	}
-	//LOG_DEBUG("send answer of last packet");
+	LOG_DEBUG("send answer of last packet");
 
 	// Send answer of the last packet
 	if(pProtocol != 0 && pProtocol->isValid())
@@ -271,13 +283,13 @@ bool waitForNextPacket()
 			return false;
 		}
 	}
-	//LOG_DEBUG("delete old protokol");
+	LOG_DEBUG("delete old protokol");
 
 	if(pNewProtocol != 0 && pNewProtocol->isValid() && pNewProtocol->getMessageCount() > 0)
 	{
 		pNewProtocol->getBytes(cBuffer);
 		pSocket->Send(cBuffer, pNewProtocol->getLength());
-		printf("send NewProtocol\n");
+		//printf("send NewProtocol\n");
 		// Delete old Packet
 		if(pProtocol)
 		{
@@ -293,6 +305,7 @@ bool waitForNextPacket()
 
 bool setUpPIController()
 {
+	LOG_DEBUG("in pid");
 	CCarMessage *pMessage = 0;
 	alt_u32 uiTries = 0;
 	alt_u8 cBuffer[128];
@@ -305,20 +318,28 @@ bool setUpPIController()
 	iCurrentSpeed = 0;
 
 	// set speed to 0
-	setSpeed(0);
-	delay (250);
+	LOG_DEBUG("speed=0");
 
+	setSpeed(0);
+	delay(250);
+
+	LOG_DEBUG("speed=30000");
 	// Full speed forward
 	setSpeed(30000);
-	delay (500);
+	delay(500);
 	// Measure speed at T1 (=10ns)
+	LOG_DEBUG("measure speed");
+
 	uiT = measureSpeed();
 	// reset speed to 0
 	setSpeed(0);
 	delay(250);
+
+	LOG_DEBUG("speed=-30000");
+
 	// Full speed backwards
 	setSpeed(-30000);
-	delay (500);
+	delay(500);
 
 	// Measure speed at Tk (=10020ns) which should be the VMax
 	uiMaxSpeed = measureSpeed();
@@ -335,8 +356,11 @@ bool setUpPIController()
 	pController = new CPIController(uiMaxSpeed, uiT, -1*uiMaxSpeed, uiMaxSpeed);
 
 	// Get the MeasurementRequestMessage
+	LOG_DEBUG("MeasurementRequestSTart");
+
 	while(true)
 	{
+
 		if(uiTries >= 5)
 		{
 			*pLED = *pLED | 0x04;
@@ -363,6 +387,9 @@ bool setUpPIController()
 		if(pMessage->isValid() && pMessage->getType() == 0x05)
 			break;
 	}
+
+	LOG_DEBUG("MeasurementRequestMessageEnd");
+
 
 	*pLED = *pLED & 0xFE;
 	((CMotorMeasurementMessage*) pMessage)->answerMessage((alt_16) uiMaxSpeed, WHEEL_SCALE, (alt_16) uiMaxSpeed, (alt_16) uiT, 0);
