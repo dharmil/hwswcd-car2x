@@ -18,11 +18,8 @@ class CARPMessage(object):
         return bytearray(x for x in self.message_list)
 
 class BaseMessage(object):
-    def __init__(self):
-        self.message_list = []
-
-    def set_header(self, message_type, message_length, subtype, flags):
-        self.message_list = self.message_list + [message_type, message_length, subtype, flags]
+    def __init__(self, message_type, message_length, subtype, flags):
+        self.message_list = [message_type, message_length, subtype, flags]
 
         print self.message_list
 
@@ -39,23 +36,24 @@ class BaseMessage(object):
 
 class WelcomeMessage(BaseMessage):
     def __init__(self):
-         BaseMessage.__init__(self)
-         self.set_header(0x01, 12, 0, 0)
+         BaseMessage.__init__(self, 0x01, 12, 0, 0)
+         self.build()
+
     def build(self):
         pass
 
 class CarVelocityMessage(BaseMessage):
-    def __init__(self):
-        BaseMessage.__init__(self)
-        self.set_header(0x04, 8, 0, 0)
+    def __init__(self, desired_speed, current_speed):
+        BaseMessage.__init__(self, 0x04, 8, 0, 0)
+        self.build(desired_speed, current_speed)
 
     def build(self, desired_speed, current_speed):
         self.add_arguments(0, desired_speed, 0, current_speed)
 
 class CarControlMessage(BaseMessage):
-    def __init__(self):
-        BaseMessage.__init__(self)
-        self.set_header(0x30, 12, 0, 0)
+    def __init__(self, speed1, speed2, speed3, speed4):
+        BaseMessage.__init__(self, 0x30, 12, 0, 0)
+        self.build(speed1, speed2, speed3, speed4)
 
     def build(self, speed1, speed2, speed3, speed4):
         speeds = [speed1, speed2, speed3, speed4]
@@ -85,38 +83,42 @@ class CarControlMessage(BaseMessage):
 
 class EmergencyBreakMessage(BaseMessage):
     def __init__(self):
-        BaseMessage.__init__(self)
-        self.set_header(0x20, 4, 0, 0)
+        BaseMessage.__init__(self, 0x20, 4, 0, 0)
+        self.build()
 
-    def build():
+    def build(self):
         pass
 
 class RemoteControlMessage(BaseMessage):
-    def __init__(self):
-        BaseMessage.__init__(self)
-        self.set_header(0x60, 8, 0, 0)
+    def __init__(self, ip1, ip2, ip3, ip4):
+        BaseMessage.__init__(self, 0x60, 8, 0, 0)
+        self.build(ip1, ip2, ip3, ip4)
 
     def build(self, ip1, ip2, ip3, ip4):
         self.add_arguments(ip1, ip2, ip3, ip4)
 
-message = CarControlMessage()
-message.build(-32000, 32000, -32000, 32000)
-# message = RemoteControlMessage()
-# message.build(192, 168, 0, 100)
+def send(message_instance):
+    carpMessage = CARPMessage(1, message_instance.get_message())
+    message_bytes = carpMessage.get_bytes()
 
-carpMessage = CARPMessage(1, message.get_message())
-message_bytes = carpMessage.get_bytes()
+    #TCP_IP = '127.0.0.1' #echo server ip
+    TCP_IP = '192.168.0.200' #Cyclone board ip
+    TCP_PORT = 23
+    BUFFER_SIZE = 1024
 
-#TCP_IP = '192.168.0.200' #Cyclone board ip
-TCP_IP = '127.0.0.1'
-TCP_PORT = 23
-BUFFER_SIZE = 1024
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TCP_IP, TCP_PORT))
+    s.send(message_bytes)
+    print "Sent data"
+    data = s.recv(BUFFER_SIZE)
+    print "Got " + data + " with len " + str(len(data))
+    print list(data)
+    s.close()
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
-s.send(message_bytes)
-print "Sent data"
-data = s.recv(BUFFER_SIZE)
-print "Got " + data + " with len " + str(len(data))
-print list(data)
-s.close()
+def main():
+    message = CarControlMessage(-32000, 32000, -32000, 32000)
+    # message = RemoteControlMessage(192, 168, 0, 100)
+    send(message)
+
+if __name__ == "__main__":
+    main()
