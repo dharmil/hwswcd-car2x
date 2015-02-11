@@ -35,7 +35,7 @@
 #define CAR_NUM_USS    (2)
 
 // Settings for the various Operation modes of the car.
-#define OPMODE_IDLE_MAXSPEED          (0u)
+#define OPMODE_IDLE_MAXSPEED          (200u)
 #define OPMODE_AUTODRIVE_MAXSPEED     (200u)
 #define OPMODE_MANUDRIVE_MAXSPEED     (400u)
 #define OPMODE_EMERGENCYSTOP_MAXSPEED (0u)

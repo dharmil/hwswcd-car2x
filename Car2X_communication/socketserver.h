@@ -111,6 +111,8 @@ typedef struct currCCtrlAnswer{
 	alt_u16 msgID;
 };
 
+void delay2 (unsigned int del);
+
 #endif /* SOCKETSERVER_H_ */
 
 

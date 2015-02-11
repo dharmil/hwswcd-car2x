@@ -60,6 +60,7 @@ extern "C" {
 #define IP_WHEEL_RF     "192.168.0.11"
 #define IP_WHEEL_RR     "192.168.0.13"
 #define IP_ULTRASOUND   "192.168.0.20"
+#define IP_WIPORT       "192.168.0.21"
 #define IP_CAMERA       "192.168.0.150" //was 110
 
 //WelcomeMsg handler
@@ -320,10 +321,10 @@ void sss_exec_command(CCarProtocol * receivedPacket, SSSConn* conn,
 				CRemoteControlMessage * remoteControlMessage =
 						(CRemoteControlMessage *) currentMessage;
 				LOG_DEBUG("RemoteControlMessage");
-				if (remoteControlMessage->get_ipPart1() == 0
-						&& remoteControlMessage->get_ipPart2() == 0
+				if (remoteControlMessage->get_ipPart1() == 192
+						&& remoteControlMessage->get_ipPart2() == 168
 						&& remoteControlMessage->get_ipPart3() == 0
-						&& remoteControlMessage->get_ipPart4() == 0) {
+						&& remoteControlMessage->get_ipPart4() == 150) {
 					state.reqMode = OPMODE_AUTODRIVE;
 					LOG_DEBUG("Switching back to automatic control.");
 				} else {
@@ -1145,6 +1146,11 @@ void SSSSimpleSocketServerTask() {
 	LOG_DEBUG("[sss_task] Simple Socket Server listening on port %d", SSS_PORT);
 	//unsigned long test=0;
 	bool ifterminator = false;
+	MemController<CarState> sharedMem;
+			CarState state;
+			sharedMem = MemController<CarState>();
+			state = sharedMem.getLastElement(false);
+			memset(&state,0,sizeof(state));
 	while (1) {
 
 //		long tv=cticks+100;
@@ -1195,11 +1201,13 @@ void SSSSimpleSocketServerTask() {
 		//select(max_socket, &readfds, NULL, NULL, NULL);  	//!!!This is blocking as long as no TCP action!!!
 
 		//processAnswerMessages
+		/*
 		MemController<CarState> sharedMem;
 		CarState state;
 		sharedMem = MemController<CarState>();
 		state = sharedMem.getLastElement(false);
-
+		memset(&state,0,sizeof(state));
+		*/
 		//emergency
 		if (cERA.stateVersion > 0 && cERA.stateVersion <= state.counterCarControl) {
 			//answer msg
@@ -1497,11 +1505,36 @@ void SSSSimpleSocketServerTask() {
 
 				LOG_DEBUG("CMotorVelMsgs built");
 
+				LOG_DEBUG("tmp buf[0:16] is \n");
+				for (int __x = 0; __x < 16; __x++) {
+					//printf("|%d|", buf1[__x]);
+				}
+
 				//send CMotVelMessages
 				send(fd_LF, (char*) buf1, tmpProtocol1->getLength(), 0);
+//				unsigned long tv=cticks+100;
+//										for(;;){
+//												////printf("tv is %ul and cticks is %ul\n",tv,cticks);
+//												if (tv<cticks) break;
+//										}
+
+
+
 				send(fd_LR, (char*) buf2, tmpProtocol2->getLength(), 0);
 				send(fd_RF, (char*) buf3, tmpProtocol3->getLength(), 0);
+//				tv=cticks+100;
+//														for(;;){
+//																////printf("tv is %ul and cticks is %ul\n",tv,cticks);
+//																if (tv<cticks) break;
+//														}
+
 				send(fd_RR, (char*) buf4, tmpProtocol4->getLength(), 0);
+//				tv=cticks+100;
+//										for(;;){
+//												////printf("tv is %ul and cticks is %ul\n",tv,cticks);
+//												if (tv<cticks) break;
+//										}
+
 
 				//free & delete
 				free (buf1);
@@ -1511,7 +1544,7 @@ void SSSSimpleSocketServerTask() {
 				delete tmpProtocol1;
 				delete tmpProtocol2;
 				delete tmpProtocol3;
-				delete tmpProtocol3;
+				delete tmpProtocol4;
 			}
 
 			//set cCCA back to zero
@@ -1565,7 +1598,7 @@ void SSSSimpleSocketServerTask() {
 		for(int i = 0 ; i < 10000; i++) {;}
 
 		//check in PREOPERATIONAL mode if all WelcomeMessages are received
-		if(!ifterminator && (state.currMode==OPMODE_PREOPERATIONAL && state.reqMode!=OPMODE_IDLE && wheel_LF!=NULL && wheel_RF!=NULL && wheel_RR != NULL)){ //&& wheel_LR!=NULL
+		if(!ifterminator && (state.currMode==OPMODE_PREOPERATIONAL && state.reqMode!=OPMODE_IDLE && wheel_LF!=NULL && wheel_RF!=NULL && wheel_RR != NULL && wheel_LR!=NULL)) {
 		//if(state.currMode==OPMODE_PREOPERATIONAL && state.reqMode!=OPMODE_IDLE && wheel_LF!=NULL){
 
 			//build welcome Messages
@@ -1576,6 +1609,11 @@ void SSSSimpleSocketServerTask() {
 			alt_u8 * buf1 = (alt_u8 *) malloc(tmpProtocol1->getLength());
 			tmpProtocol1->getBytes(buf1);
 
+			LOG_DEBUG("tmp buf[0:16] is \n");
+			for (int __x = 0; __x < 16; __x++) {
+				printf("|%d|", buf1[__x]);
+			}
+
 			//rfwheel
 			CCarProtocol* tmpProtocol2=new CCarProtocol(0,(CCarMessage **) &wheel_RF,1);
 			alt_u8 * buf2 = (alt_u8 *) malloc(tmpProtocol2->getLength());
@@ -1583,9 +1621,9 @@ void SSSSimpleSocketServerTask() {
 
 
      		//lrwheel
-			//CCarProtocol* tmpProtocol3=new CCarProtocol(0,(CCarMessage **) &wheel_LR,1);
-			//alt_u8 * buf3 = (alt_u8 *) malloc(tmpProtocol3->getLength());
-			//tmpProtocol3->getBytes(buf3);
+			CCarProtocol* tmpProtocol3=new CCarProtocol(0,(CCarMessage **) &wheel_LR,1);
+			alt_u8 * buf3 = (alt_u8 *) malloc(tmpProtocol3->getLength());
+			tmpProtocol3->getBytes(buf3);
 			//rrwheel
 			CCarProtocol* tmpProtocol4=new CCarProtocol(0,(CCarMessage **) &wheel_RR,1);
 			alt_u8 * buf4 = (alt_u8 *) malloc(tmpProtocol4->getLength());
@@ -1595,7 +1633,7 @@ void SSSSimpleSocketServerTask() {
 			send(fd_LF, (char*) buf1, tmpProtocol1->getLength(), 0);
 			unsigned long tv=cticks+100;
 						for(;;){
-								//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+								////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 								if (tv<cticks) break;
 						}
 
@@ -1603,16 +1641,16 @@ void SSSSimpleSocketServerTask() {
 			send(fd_RF, (char*) buf2, tmpProtocol2->getLength(), 0);
 			tv=cticks+100;
 						for(;;){
-								//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+								////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 								if (tv<cticks) break;
 						}
-			//send(fd_LR, (char*) buf3, tmpProtocol3->getLength(), 0);
+			send(fd_LR, (char*) buf3, tmpProtocol3->getLength(), 0);
 
 
 		    send(fd_RR, (char*) buf4, tmpProtocol4->getLength(), 0);
 		    tv=cticks+100;
 		    			for(;;){
-		    					//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+		    					////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 		    					if (tv<cticks) break;
 		    			}
 			LOG_DEBUG("Welcomes sent. Give NanoBoards some time...");
@@ -1620,7 +1658,7 @@ void SSSSimpleSocketServerTask() {
 			//let the nanoboard process the messages
 			tv=cticks+100;
 			for(;;){
-					//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+					////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 					if (tv<cticks) break;
 			}
 
@@ -1637,26 +1675,28 @@ void SSSSimpleSocketServerTask() {
 			//send empty CMotorMeasurementMessages to all wheels to sync them
 			tv=cticks+500;
 						for(;;){
-								//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+								////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 								if (tv<cticks) break;
 						}
 			send(fd_LF, (char*) buf1, tmpProtocol1->getLength(), 0);
+//			LOG_DEBUG("buf1len %d", tmpProtocol1->getLength());
+//			LOG_DEBUG("\n\n\nbuf1is\n %s \n\n\n", (char *) buf1);
 			tv=cticks+500;
 						for(;;){
-								//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+								////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 								if (tv<cticks) break;
 						}
-			//send(fd_LR, (char*) buf1, tmpProtocol1->getLength(), 0);
+			send(fd_LR, (char*) buf1, tmpProtocol1->getLength(), 0);
 			send(fd_RF, (char*) buf1, tmpProtocol1->getLength(), 0);
 			tv=cticks+500;
 						for(;;){
-								//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+								////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 								if (tv<cticks) break;
 						}
 			send(fd_RR, (char*) buf1, tmpProtocol1->getLength(), 0);
 			tv=cticks+500;
 						for(;;){
-								//printf("tv is %ul and cticks is %ul\n",tv,cticks);
+								////printf("tv is %ul and cticks is %ul\n",tv,cticks);
 								if (tv<cticks) break;
 						}
 
@@ -1665,11 +1705,11 @@ void SSSSimpleSocketServerTask() {
 			//free & delete
 			free (buf1);
 			free (buf2);
-			//free (buf3);
+			free (buf3);
 			free (buf4);
 			delete tmpProtocol1;
 			delete tmpProtocol2;
-			//delete tmpProtocol3;
+			delete tmpProtocol3;
 			delete tmpProtocol4;
 
 			//set state to IDLE

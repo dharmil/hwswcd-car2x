@@ -59,15 +59,16 @@ public:
 	//		break;
 	//	}
 
-
 		m_memArea_p = &AreaCarState;
+		m_memArea_p = (MemSharedArea<CarState> *)( (int)m_memArea_p | 0x80000000); //added for 31 bypass
 		m_mutexArea_p = altera_avalon_mutex_open("/dev/shared_memory_mutex");
 
 		if(m_memArea_p->content_a == NULL)
 		{
 			LOG_DEBUG("Initialising shared memory...");
 			getSharedMemArea();
-			m_memArea_p->content_a = AreaCarStateBuffer;
+			//m_memArea_p->content_a = AreaCarStateBuffer;
+			m_memArea_p->content_a = (CarState *)((int)AreaCarStateBuffer | 0x80000000);
 			m_memArea_p->index_u32 = 0;
 			m_memArea_p->maxNumElements_u32 = BUFFERSIZE_CARSTATE;
 			memset(&(m_memArea_p->content_a[0]), 0, sizeof(T)*BUFFERSIZE_CARSTATE);
