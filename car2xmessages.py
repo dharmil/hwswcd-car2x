@@ -25,7 +25,7 @@ class BaseMessage(object):
 
     def add_arguments(self, *arg):
         print self.message_list
-        assert len(arg) == self.message_list[1] - 4 #make sure count of arguments matches
+        assert len(arg) == self.message_list[1] - len(self.message_list) #make sure count of arguments matches
         self.message_list = self.message_list + list(arg)
 
     def build(self):
@@ -43,6 +43,8 @@ class WelcomeMessage(BaseMessage):
         pass
 
 class CarVelocityMessage(BaseMessage):
+    '''This message is for individual wheels'''
+    
     def __init__(self, desired_speed, current_speed):
         BaseMessage.__init__(self, 0x04, 8, 0, 0)
         self.build(desired_speed, current_speed)
@@ -51,6 +53,13 @@ class CarVelocityMessage(BaseMessage):
         self.add_arguments(0, desired_speed, 0, current_speed)
 
 class CarControlMessage(BaseMessage):
+    '''Init a CarControlMessage.
+       @param speed1 - Speed for left front wheel
+       @param speed2 - Speed for left rear wheel
+       @param speed3 - Speed for right front wheel
+       @param speed4 - Speed for right rear wheel
+       Values need to be between -32768 and +32768'''
+    
     def __init__(self, speed1, speed2, speed3, speed4):
         BaseMessage.__init__(self, 0x30, 12, 0, 0)
         self.build(speed1, speed2, speed3, speed4)
@@ -71,7 +80,7 @@ class CarControlMessage(BaseMessage):
                     -x = 2^16 + x + 1
                     -3 = 2^16 + -3 + 1 = 2^16 - 2
                 '''
-                speeds[i] = 2**16 + speeds[i] + 1
+                speeds[i] = 2**16 + speeds[i] #fix the off-by-one error
 
         print speeds
 
