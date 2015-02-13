@@ -1,6 +1,33 @@
 #!/usr/bin/env python
 #@author dharmil
 
+"""This script will allow sending Car2x messages to the cyclone board of the car. 
+   It can be used as a wrapper to manually control the car or for debugging purposes.
+   Usage: Please use this script in ipython as it will allow tab completion!
+   ipython
+   
+   import car [TAB]
+   import car2xmessages as c2x
+
+   rc = c2x. [TAB]
+   rc = c2x.RemoteControlMessage('192.168.0.100')
+   c2x.send(rc)
+
+   Now the computer has control of the car!
+
+   cc = c2x. [TAB]
+   cc = c2x.CarControlMessage(100, 100, 100, 100)
+   c2x.send(cc)
+
+   Now all the wheels will rotate with 100 as the speed!
+
+   eb = c2x. [TAB]
+   eb = c2x.EmergencyBreakMessage()
+   c2x.send(eb)
+
+   Now all the wheels of the car will have immediately stopped and car won't accept any other commands!
+"""
+
 import socket
 import math
 
@@ -40,10 +67,10 @@ class WelcomeMessage(BaseMessage):
          self.build()
 
     def build(self):
-        pass
+        raise NotImplementedError()
 
 class CarVelocityMessage(BaseMessage):
-    '''This message is for individual wheels'''
+    """This message is for individual wheels"""
     
     def __init__(self, desired_speed, current_speed):
         BaseMessage.__init__(self, 0x04, 8, 0, 0)
@@ -53,12 +80,12 @@ class CarVelocityMessage(BaseMessage):
         self.add_arguments(0, desired_speed, 0, current_speed)
 
 class CarControlMessage(BaseMessage):
-    '''Init a CarControlMessage.
+    """Init a CarControlMessage.
        @param speed1 - Speed for left front wheel
        @param speed2 - Speed for left rear wheel
        @param speed3 - Speed for right front wheel
        @param speed4 - Speed for right rear wheel
-       Values need to be between -32768 and +32768'''
+       Values need to be between -32768 and +32768"""
     
     def __init__(self, speed1, speed2, speed3, speed4):
         BaseMessage.__init__(self, 0x30, 12, 0, 0)
@@ -91,6 +118,10 @@ class CarControlMessage(BaseMessage):
         self.add_arguments(int(math.floor(speeds[0] / 256)), speeds[0] % 256, int(math.floor(speeds[1] / 256)), speeds[1] % 256, int(math.floor(speeds[2] / 256)), speeds[2] % 256, int(math.floor(speeds[3] / 256)), speeds[3] % 256)
 
 class EmergencyBreakMessage(BaseMessage):
+    """Init a EmergencyBreakMessage to stop all the wheels.
+       After this message is executed, the car won't respond to any other commands!
+    """
+
     def __init__(self):
         BaseMessage.__init__(self, 0x20, 4, 0, 0)
         self.build()
@@ -99,12 +130,22 @@ class EmergencyBreakMessage(BaseMessage):
         pass
 
 class RemoteControlMessage(BaseMessage):
-    def __init__(self, ip1, ip2, ip3, ip4):
-        BaseMessage.__init__(self, 0x60, 8, 0, 0)
-        self.build(ip1, ip2, ip3, ip4)
+    """Init a RemoteControlMessage to auth my computer
+        @param ip - Complete ip in string like 255.255.0.0
+    """    
 
-    def build(self, ip1, ip2, ip3, ip4):
-        self.add_arguments(ip1, ip2, ip3, ip4)
+    def __init__(self, ip):
+        BaseMessage.__init__(self, 0x60, 8, 0, 0)
+        self.build(ip)
+
+    def build(self, ip):
+        ip_list = ip.split('.')
+
+        for ip in ip_list:
+            assert int(ip) >= 0 and int(ip) <= 255
+
+        self.add_arguments(int(ip_list[0]), int(ip_list[1]), int(ip_list[2]), int(ip_list[3]))
+
 
 def send(message_instance):
     carpMessage = CARPMessage(1, message_instance.get_message())
