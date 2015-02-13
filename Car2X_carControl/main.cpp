@@ -28,7 +28,7 @@ int main()
 
 	while(1)
 	{
-		for(int i=0;i<5000;i++){;}
+		for(int i=0;i<500;i++){;}
 		int nios;
 
 		// get the lastest car state from the shared memory
@@ -49,7 +49,7 @@ int main()
 		state.counterCarControl=state.counterComm;
 
 		setMotorSpeeds(&state);
-		LOG_DEBUG("After set!");
+		//LOG_DEBUG("After set!");
 		if(state.currMode==OPMODE_MANUDRIVE){
 			state.ip1=state.reqip1;
 			state.ip2=state.reqip2;
@@ -66,7 +66,7 @@ int main()
 
 		// TODO: write a delay function w/ timer. Otherwise we might run into problems blocking the mutex from all the shared memory reads...
 		//delay(10);
-		for (int i = 0; i < 15000; i++) {;}
+
 	}
 
 	return -1;
@@ -145,8 +145,8 @@ void setMotorSpeeds(CarState * state)
 	if(abs(iReqVel) > abs(state->iMaxSpeed))
 	{
 		fVelFactor = state->iMaxSpeed * 100 / iReqVel;
-		LOG_DEBUG("Request velocity too high. OpMode: %d, MaxVel: %d, VelFactor: %f",
-			(int) state->currMode, (int) state->iMaxSpeed, fVelFactor);
+		LOG_DEBUG("Request velocity too high. OpMode: %d, MaxVel: %d, VelFactor: %f, Requested value: %d",
+			(int) state->currMode, (int) state->iMaxSpeed, fVelFactor, abs(iReqVel));
 	}
 	else
 	{

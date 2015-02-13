@@ -14,6 +14,9 @@ int main (void)
 {
 
 
+
+
+
 	bool ret;
 	alt_u16 state = 0; // State to distinguish between the small cycles
 	CCarMessage *pCurrentMessage = 0; // The current message
@@ -55,10 +58,9 @@ int main (void)
 	// Small cycle:
 	while(true)
 	{
-		delay(500);
 		if(!waitForNextPacket())
 			goto fail;
-		//if(!waitForEndOfCycle())//	Alter Code, welcher noch zeitbasiert war. Die zeitbasierte Variante wurde fallengelassen, da das Cyclone 4 Board nicht zeitbasiert ist und eine Synchronisation aufgrund der BeschrÃ¤nkungen seitens des Kommunikationsnetzwerks de facto unmÃ¶glich erscheint
+		//if(!waitForEndOfCycle())//	Alter Code, welcher noch zeitbasiert war. Die zeitbasierte Variante wurde fallengelassen, da das Cyclone 4 Board nicht zeitbasiert ist und eine Synchronisation aufgrund der Beschränkungen seitens des Kommunikationsnetzwerks de facto unmöglich erscheint
 		//	goto fail;
 		//LOG_DEBUG("EndofCycle");
 		if(!controlSpeed())
@@ -100,6 +102,8 @@ fail:
 	*pLED = 0x80;
 	delay(10000);
 	return -1;
+
+
 
 }
 
@@ -219,12 +223,12 @@ bool controlSpeed()
 
 	// Finish running speed measurement
 	iCurrentSpeed = measureSpeed();
-
+	iCurrentSpeed = iCurrentSpeed * (-1); //Die Motoren auf dieser Seite sind um 180 Grad gedreht, insofern muss der Wert invertiert werden
 	// Call PI-Controller with speed error
 	iNextSpeed = pController->control(iDesiredSpeed - iCurrentSpeed);
 	// Set new speed
 	setSpeed(iNextSpeed + iCurrentSpeed);
-	LOG_DEBUG("iNextSpeed: %hd iCurrentSpeed: %hd",iNextSpeed,iCurrentSpeed);
+	//LOG_DEBUG("iNextSpeed: %hd iCurrentSpeed: %hd",iNextSpeed,iCurrentSpeed);
 
 	// Is there a VelocityMessage then set the current speed as an answer
 	if(pProtocol != 0 && pProtocol->isValid() && pProtocol->getMessageCount() > 0)
@@ -235,6 +239,7 @@ bool controlSpeed()
 			((CMotorVelocityMessage*) pMessage)->answerMessage(iCurrentSpeed);
 		}
 	}
+
 
 	return true;
 }
@@ -344,6 +349,7 @@ bool setUpPIController()
 	// Measure speed at Tk (=10020ns) which should be the VMax
 	uiMaxSpeed = measureSpeed();
 
+
 	setSpeed(0);
 	delay(250);
 	// Reset the controller if exists
@@ -356,7 +362,7 @@ bool setUpPIController()
 	pController = new CPIController(uiMaxSpeed, uiT, -1*uiMaxSpeed, uiMaxSpeed);
 
 	// Get the MeasurementRequestMessage
-	LOG_DEBUG("MeasurementRequestSTart");
+	//LOG_DEBUG("MeasurementRequestSTart");
 
 	while(true)
 	{
@@ -401,6 +407,7 @@ bool setUpPIController()
 		delete(pProtocol);
 		pProtocol = 0;
 	}
+
 
 	return true;
 }
