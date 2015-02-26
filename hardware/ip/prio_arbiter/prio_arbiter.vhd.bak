@@ -1,0 +1,566 @@
+
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- What this arbiter does:
+-- It performs bus arbitration for currently 4 masters.
+-- Arbitration will take in a round robin fashion.
+-- If a master does not request his slot at the beginning of the slot,
+-- It is assigned to the next master, who wants to access the bus.
+-- The total RoundRobin order remains untouched. This means, that if a master
+-- takes a slot of an other master, he is allowed to access the bus two times
+-- within one round.
+-- In the special case, when only one master wants to access the bus, while all
+-- other masters are idle, this master is allowed to continuously access the bus.
+-- But as soon as an other master is ready to start a transaction it can be
+-- guaranteed, to be allowed to access the bus within one Round Robin Round.
+
+entity prio_arbiter is
+  generic (SLAVE_ADDR_WIDTH : integer := 26;
+           DATA_WIDTH : integer := 32;
+           MASTER_ADDR_WIDTH : integer := 28;
+           BYTE_ENABLE_BITS  : integer := 4;
+           -- number of masters. This is not editable without changing the source code
+           NUM_OF_MASTERS   : integer := 4;
+           --maximum simultaneous pending requests of data to the downstream master
+           REQUEST_QUEUE_LENGTH : integer := 24;
+           -- how many clock cycles the bus is granted to each master
+           SLOT_TIME : integer := 8);
+  port (
+         csi_clockreset_CLK : in std_logic;
+         csi_clockreset_RESET_n : in std_logic;
+         -- Slave interfaces for 4 masters:
+         -- Avalon slave:
+         AVS_S0_ADDRESS       : in STD_LOGIC_VECTOR ((SLAVE_ADDR_WIDTH - 1) DOWNTO 0);
+         AVS_S0_CHIPSELECT    : in STD_LOGIC;
+         AVS_S0_WRITE         : in STD_LOGIC;
+         AVS_S0_READ          : in STD_LOGIC;
+         AVS_S0_WRITEDATA     : in STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S0_BYTEENABLE    : in std_logic_vector((BYTE_ENABLE_BITS - 1) downto 0) ;
+         AVS_S0_READDATA      : out STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S0_READDATAVALID : out std_logic;
+         AVS_S0_WAITREQUEST   : out std_logic := '0';
+
+         -- Avalon slave:
+         AVS_S1_ADDRESS       : in STD_LOGIC_VECTOR ((SLAVE_ADDR_WIDTH - 1) DOWNTO 0);
+         AVS_S1_CHIPSELECT    : in STD_LOGIC;
+         AVS_S1_WRITE         : in STD_LOGIC;
+         AVS_S1_READ          : in STD_LOGIC;
+         AVS_S1_WRITEDATA     : in STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S1_BYTEENABLE    : in std_logic_vector((BYTE_ENABLE_BITS - 1) downto 0) ;
+         AVS_S1_READDATA      : out STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S1_READDATAVALID : out std_logic;
+         AVS_S1_WAITREQUEST   : out std_logic := '0';
+
+         -- Avalon slave:
+         AVS_S2_ADDRESS       : in STD_LOGIC_VECTOR ((SLAVE_ADDR_WIDTH - 1) DOWNTO 0);
+         AVS_S2_CHIPSELECT    : in STD_LOGIC;
+         AVS_S2_WRITE         : in STD_LOGIC;
+         AVS_S2_READ          : in STD_LOGIC;
+         AVS_S2_WRITEDATA     : in STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S2_BYTEENABLE    : in std_logic_vector((BYTE_ENABLE_BITS - 1) downto 0) ;
+         AVS_S2_READDATA      : out STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S2_READDATAVALID : out std_logic;
+         AVS_S2_WAITREQUEST   : out std_logic := '0';
+
+         -- Avalon slave:
+         AVS_S3_ADDRESS       : in STD_LOGIC_VECTOR ((SLAVE_ADDR_WIDTH - 1) DOWNTO 0);
+         AVS_S3_CHIPSELECT    : in STD_LOGIC;
+         AVS_S3_WRITE         : in STD_LOGIC;
+         AVS_S3_READ          : in STD_LOGIC;
+         AVS_S3_WRITEDATA     : in STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S3_BYTEENABLE    : in std_logic_vector((BYTE_ENABLE_BITS - 1) downto 0) ;
+         AVS_S3_READDATA      : out STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVS_S3_READDATAVALID : out std_logic;
+         AVS_S3_WAITREQUEST   : out std_logic := '0';
+
+         -- Interface to the downstream bus:
+         -- Avalon master:
+         AVM_M1_ADDRESS             : OUT STD_LOGIC_VECTOR((MASTER_ADDR_WIDTH - 1) DOWNTO 0) := (others => '0'); --because of the byte addresibility
+         AVM_M1_READ               : OUT STD_LOGIC := '0';
+         AVM_M1_WRITE              : OUT STD_LOGIC := '0';
+         AVM_M1_WRITEDATA          : OUT STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0) := (others => '0');
+         AVM_M1_BYTEENABLE         : OUT std_logic_vector((BYTE_ENABLE_BITS - 1) downto 0) := (others => '0');
+         AVM_M1_READDATA           : IN  STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+         AVM_M1_WAITREQUEST        : IN  STD_LOGIC;
+         AVM_M1_READDATAVALID      : IN  STD_LOGIC
+       );
+end entity;
+
+
+architecture behave of prio_arbiter is
+
+ constant SIMPLE_ARBITRATION : integer := 0;
+ constant HRT_ARBITRATION    : integer := 1;
+ constant VERSATILE_ARBITRATION : integer := 0;
+  -- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+  -- data structures to remember the order in which data is requested, to be able
+  -- to distribute arriving data accordingly
+  type master_id_array is array (0 to (REQUEST_QUEUE_LENGTH - 1)) of
+    integer range 0 to (NUM_OF_MASTERS - 1);
+
+  type data_request_queue_type is record
+    -- where the current queue entry can be read
+    index_read  : integer range 0 to (REQUEST_QUEUE_LENGTH - 1);
+    -- where the next queue entry should be written
+    index_write : integer range 0 to (REQUEST_QUEUE_LENGTH - 1);
+    -- array holding IDs of the masters, representing the queue
+    requests    : master_id_array;
+  end record;
+  -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+  -- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+  -- Data structures for Avalon slaves inputs
+  -- Used for beeing able to easy select a slave input via an array
+  type slave_in_vector_type is record
+    chip_select : std_logic;
+    read        : std_logic;
+    write       : std_logic;
+    address     : std_logic_vector((SLAVE_ADDR_WIDTH - 1) DOWNTO 0);
+    write_data  : std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
+    byte_enable : std_logic_vector((BYTE_ENABLE_BITS - 1) downto 0) ;
+  end record;
+
+  type slave_in_vector is array  (0 to (NUM_OF_MASTERS)) of slave_in_vector_type;
+
+  signal slave_in : slave_in_vector;
+  -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+  -- Data structure for a rotating list of masters.
+  -- The entry 0 represents the master with highest priority
+  type prio_list_type is array (0 to (NUM_OF_MASTERS - 1)) of integer range 0 to (NUM_OF_MASTERS - 1);
+
+  -- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+  -- Data structures for registers:
+  type reg_type is record
+    -- id of the master, who is granted to write data to the downstream avalon bus.
+    -- +1 because we add one dummy master, which is selected if no one is allowed to
+    -- use the bus
+    selected_master         : integer range 0 to (NUM_OF_MASTERS - 1 + 1);
+    -- time which is left in slot (until it is the turn of the next master)
+    time_left               : integer range 0 to SLOT_TIME - 1;
+    -- rotating list of masters, representing the priorities
+    prio_list               : prio_list_type;  -- Round robin schedule
+    -- used to store the order of read requests. This helps us to redistribute
+    -- arriving data to the right masters
+    data_request_queue      : data_request_queue_type;
+  end record;
+
+  signal r, rin: reg_type;
+  -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  
+  -- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv 
+  -- For simple arbiter only 
+  signal low_prio_master, high_prio_master, slot_index : integer range 0 to (NUM_OF_MASTERS - 1) := 0;
+  signal low_prio_master_found, high_prio_master_found, change_master, master_found, master_found_r : std_logic := '0';
+  
+  type slave_out_vector_type is record
+    wait_req    : std_logic;
+    read_valid  : std_logic;
+    read_data  : std_logic_vector((DATA_WIDTH - 1) DOWNTO 0);
+  end record;
+  type slave_out_vector is array  (0 to (NUM_OF_MASTERS - 1)) of slave_out_vector_type;
+  signal slave_out : slave_out_vector;
+  signal time_left : integer range 0 to SLOT_TIME - 1 := 0;
+  signal selected_master, selected_master_r : integer range 0 to (NUM_OF_MASTERS - 1) := 0;
+  -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+begin
+
+versatile: if (VERSATILE_ARBITRATION = 1) generate
+  -- All logic happens in this process:
+  comb  : process(AVM_M1_READDATAVALID, AVM_M1_WAITREQUEST, slave_in, r)
+    variable v : reg_type;
+  begin
+    v := r; --default assignment. Avoid latches
+    --vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    -- Priority based Round robin scheduling:
+    if (r.time_left = 0) then
+      -- slot time has run out
+      v.time_left := SLOT_TIME - 1;
+      -- we have to switch master:
+      -- rotate priorities:
+      for i in (NUM_OF_MASTERS - 1) downto 1 loop
+        v.prio_list(i-1) := r.prio_list(i);
+      end loop;
+      v.prio_list(NUM_OF_MASTERS - 1) := r.prio_list(0);
+      -- by default dummy master gets the slot:
+      v.selected_master := NUM_OF_MASTERS;
+      -- now we look, if someone else wants the slot, starting with the highest priority:
+      for i in 0 to (NUM_OF_MASTERS-1) loop
+        if (slave_in(r.prio_list(i)).chip_select = '1') then
+          v.selected_master := r.prio_list(i);
+          -- if we found an upstream master, who wants to write to the bus, we
+          -- stop searching
+          exit;
+        end if;
+      end loop;
+      -- ATTENTION:
+      -- In this implementation, the upstream master has to request a transaction at the
+      -- beginning of the slot. Else the slot gets assigned to an other master or is
+      -- wasted, in case no one wants to access the bus at the beginning of the slot.
+      -- Starting a transaction in the middle of a slot, will cause WAITREQUEST to be
+      -- issued, even if the slot is currently not used.
+    else
+      -- update slot counter:
+      v.time_left := r.time_left - 1;
+    end if;
+    --^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    --vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    -- handle read requests (put each request in a queue)
+    -- assuming READ is only high for 1 clock cycle, except when a wait request is issued
+    -- only process reads for masters, which are not dummy master
+    -- the outer if is needed, so that the slave_in is always accessed within bounds
+    if(v.selected_master /= NUM_OF_MASTERS) then
+      if (slave_in(v.selected_master).read = '1' and AVM_M1_WAITREQUEST = '0') then
+        -- here the selected master has successfully issued a read request to the
+        -- downstream bus, hence we store the read request in the data_request_queue...
+        v.data_request_queue.requests(r.data_request_queue.index_write) := v.selected_master;
+        -- update queue index ATTENTION: no boundary checks are performed!
+        -- It has to be ensured, that the queue will never be overfilled.
+        -- i.e. not more than the maximum allowed pending reads are issued at the
+        -- same time
+        if (r.data_request_queue.index_write = REQUEST_QUEUE_LENGTH - 1) then
+          v.data_request_queue.index_write := 0;
+        else
+          v.data_request_queue.index_write := r.data_request_queue.index_write + 1;
+        end if;
+      end if;
+    end if;
+    --^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    --vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    -- distribute arriving data
+    if (AVM_M1_READDATAVALID = '1') then
+        -- we received one word, so update the request queue:
+        -- We have to switch to the next master in the queue:
+        -- ATTENTION: Again no boundary checks are performed. One has to be sure, that
+        -- no data will arrive, when no data was requested
+        -- This will be OK, if the downstream system will behave as specified.
+      if (r.data_request_queue.index_read = REQUEST_QUEUE_LENGTH - 1) then
+        v.data_request_queue.index_read := 0;
+      else
+        v.data_request_queue.index_read := r.data_request_queue.index_read + 1;
+      end if;
+    end if;
+    --^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    rin <= v; -- drive register inputs
+  end process;
+
+
+  regs  : process(csi_clockreset_CLK, csi_clockreset_RESET_n)
+  begin
+    if (csi_clockreset_RESET_n = '0') then
+      -- on reset: assign safe default values:
+      r.selected_master <= NUM_OF_MASTERS;
+      r.time_left <= SLOT_TIME - 1;
+      r.prio_list <= (0=>0, 1=>1, 2=>2, 3=>3);
+      r.data_request_queue <= (index_read => 0,
+                              index_write => 0,
+                              requests => (others => 0));
+    elsif (rising_edge(csi_clockreset_CLK)) then
+      -- control registers:
+      r <= rin;
+    end if;
+  end process;
+
+  -- allow the granted master to write to the bus downstream
+  AVM_M1_READ       <= slave_in(rin.selected_master).read;
+  AVM_M1_WRITE      <= slave_in(rin.selected_master).write;
+  AVM_M1_WRITEDATA  <= slave_in(rin.selected_master).write_data;
+  AVM_M1_BYTEENABLE <= slave_in(rin.selected_master).byte_enable;
+
+  -- connect signals for all slaves to their input/output ports
+  slave_in(0).chip_select     <= AVS_S0_CHIPSELECT;
+  slave_in(0).read            <= AVS_S0_READ;
+  slave_in(0).write           <= AVS_S0_WRITE;
+  slave_in(0).address         <= AVS_S0_ADDRESS;
+  slave_in(0).write_data      <= AVS_S0_WRITEDATA;
+  slave_in(0).byte_enable     <= AVS_S0_BYTEENABLE;
+  -- Issue WAITREQUEST, when the upstream master is not selected:
+  AVS_S0_WAITREQUEST          <= AVM_M1_WAITREQUEST when (rin.selected_master = 0) else '1';
+  -- the data return channel is controlled by the request queue:
+  AVS_S0_READDATAVALID        <= AVM_M1_READDATAVALID when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 0) else '0';
+  AVS_S0_READDATA             <= AVM_M1_READDATA when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 0) else (others => '0');
+
+  slave_in(1).chip_select     <= AVS_S1_CHIPSELECT;
+  slave_in(1).read            <= AVS_S1_READ;
+  slave_in(1).write           <= AVS_S1_WRITE;
+  slave_in(1).address         <= AVS_S1_ADDRESS;
+  slave_in(1).write_data      <= AVS_S1_WRITEDATA;
+  slave_in(1).byte_enable     <= AVS_S1_BYTEENABLE;
+  -- Issue WAITREQUEST, when the upstream master is not selected:
+  AVS_S1_WAITREQUEST          <= AVM_M1_WAITREQUEST when (rin.selected_master = 1) else '1';
+  -- the data return channel is controlled by the request queue:
+  AVS_S1_READDATAVALID        <= AVM_M1_READDATAVALID when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 1) else '0';
+  AVS_S1_READDATA             <= AVM_M1_READDATA when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 1) else (others => '0');
+
+  slave_in(2).chip_select     <= AVS_S2_CHIPSELECT;
+  slave_in(2).read            <= AVS_S2_READ;
+  slave_in(2).write           <= AVS_S2_WRITE;
+  slave_in(2).address         <= AVS_S2_ADDRESS;
+  slave_in(2).write_data      <= AVS_S2_WRITEDATA;
+  slave_in(2).byte_enable     <= AVS_S2_BYTEENABLE;
+  -- Issue WAITREQUEST, when the upstream master is not selected:
+  AVS_S2_WAITREQUEST          <= AVM_M1_WAITREQUEST when (rin.selected_master = 2) else '1';
+  -- the data return channel is controlled by the request queue:
+  AVS_S2_READDATAVALID        <= AVM_M1_READDATAVALID when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 2) else '0';
+  AVS_S2_READDATA             <= AVM_M1_READDATA when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 2) else (others => '0');
+
+  slave_in(3).chip_select     <= AVS_S3_CHIPSELECT;
+  slave_in(3).read            <= AVS_S3_READ;
+  slave_in(3).write           <= AVS_S3_WRITE;
+  slave_in(3).address         <= AVS_S3_ADDRESS;
+  slave_in(3).write_data      <= AVS_S3_WRITEDATA;
+  slave_in(3).byte_enable     <= AVS_S3_BYTEENABLE;
+  -- Issue WAITREQUEST, when the upstream master is not selected:
+  AVS_S3_WAITREQUEST          <= AVM_M1_WAITREQUEST when (rin.selected_master = 3) else '1';
+  -- the data return channel is controlled by the request queue:
+  AVS_S3_READDATAVALID        <= AVM_M1_READDATAVALID when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 3) else '0';
+  AVS_S3_READDATA             <= AVM_M1_READDATA when
+                                 (r.data_request_queue.requests(r.data_request_queue.index_read) =
+                                 3) else (others => '0');
+ 
+  -- dummy master is not doing anything
+  slave_in(NUM_OF_MASTERS).chip_select     <= '0';
+  slave_in(NUM_OF_MASTERS).read            <= '0';
+  slave_in(NUM_OF_MASTERS).write           <= '0';
+  slave_in(NUM_OF_MASTERS).address         <= (others => '0'); 
+  slave_in(NUM_OF_MASTERS).write_data      <= (others => '0'); 
+  slave_in(NUM_OF_MASTERS).byte_enable     <= (others => '0');
+
+  -- FIXME: I still do not exactly understand this. In the avalon specification,
+  -- it is described, that the Master address should always be aligned to multiples
+  -- of the DATA_WIDTH.
+  --
+  -- the master always issues a byte address. Slave receives the address according to its data width. For example, the slave with 32 bit wide data bus will receive address in the form of integers.
+  -- Here, the address 0 is integer 0, address 1 is integer 1 and so on (take care of byte enable). 
+  AVM_M1_ADDRESS((MASTER_ADDR_WIDTH - 1) DOWNTO 2) <= slave_in(rin.selected_master).address;
+  AVM_M1_ADDRESS(1 downto 0)   <= "00" when (slave_in(rin.selected_master).byte_enable = "0001") or
+  (slave_in(rin.selected_master).byte_enable = "1111") else
+  "01" when (slave_in(rin.selected_master).byte_enable = "0010") or
+  (slave_in(rin.selected_master).byte_enable = "0011") else
+  "10" when (slave_in(rin.selected_master).byte_enable = "0100") or
+  (slave_in(rin.selected_master).byte_enable = "1100") else
+  "11" when (slave_in(rin.selected_master).byte_enable = "1000") else
+  "00" ;
+  
+end generate;
+
+simple: if (SIMPLE_ARBITRATION = 1) generate
+
+process(csi_clockreset_CLK, csi_clockreset_RESET_n)
+  begin
+    if (csi_clockreset_RESET_n = '0') then
+      selected_master_r <= 0;
+      time_left <= SLOT_TIME - 1;
+      change_master <= '0';  
+      slot_index <= 0;  
+      master_found_r <= '0'  ;
+    elsif (rising_edge (csi_clockreset_CLK)) then
+      change_master <= '0';
+      selected_master_r <= selected_master;
+      master_found_r    <= master_found;
+      if (time_left = 0) then
+        time_left <= SLOT_TIME - 1;
+        change_master <= '1';
+        if (slot_index = NUM_OF_MASTERS - 1) then
+          slot_index <= 0;
+        else
+          slot_index <= slot_index + 1;
+        end if;
+      else
+        time_left <= time_left - 1;
+      end if;
+    end if;
+  end process;
+    
+  process(change_master, slot_index, slave_in, master_found_r, selected_master_r)
+    begin
+      low_prio_master_found <=  master_found_r;
+      low_prio_master <= selected_master_r;
+      if (change_master = '1') then
+        low_prio_master_found <=  '0';
+        for i in NUM_OF_MASTERS - 1 downto 0 loop
+          if (i > slot_index) then
+            if (slave_in(i).chip_select = '1') then
+              low_prio_master <= i;
+              low_prio_master_found <= '1';
+              exit;
+            end if;
+          end if;
+        end loop;
+      end if;
+  end process;
+  
+   process(change_master, slot_index, slave_in, master_found_r, selected_master_r)
+    begin
+      high_prio_master_found <= master_found_r;
+      high_prio_master <= selected_master_r;
+      if (change_master = '1') then
+        high_prio_master_found <=  '0';
+        for i in NUM_OF_MASTERS - 1 downto 0 loop
+          if (i <= slot_index) then
+            if (slave_in(i).chip_select = '1') then
+              high_prio_master <= i;
+              high_prio_master_found <= '1';
+              exit;
+            end if;
+          end if;
+        end loop;
+      end if;
+  end process;
+  
+  process(change_master, high_prio_master_found, low_prio_master_found, master_found_r)
+    begin
+      master_found <= master_found_r;
+      if (change_master = '1') then
+        master_found <= high_prio_master_found or low_prio_master_found;
+      end if;
+  end process;
+  
+  
+      selected_master <= high_prio_master when high_prio_master_found = '1' else
+                             low_prio_master when low_prio_master_found = '1' else
+                             selected_master_r;
+end generate; -- simple arbitration  
+
+hrt: if (HRT_ARBITRATION = 1) generate
+
+process(csi_clockreset_CLK, csi_clockreset_RESET_n)
+  begin
+    if (csi_clockreset_RESET_n = '0') then
+      selected_master_r <= 0;
+      time_left <= SLOT_TIME - 1;
+      change_master <= '0'; 
+      master_found_r <= '0'  ;
+    elsif (rising_edge (csi_clockreset_CLK)) then
+      change_master <= '0';
+      selected_master_r <= selected_master;
+      master_found_r    <= master_found;
+      if (time_left = 0) then
+        time_left <= SLOT_TIME - 1;
+        change_master <= '1';
+      else
+        time_left <= time_left - 1;
+      end if;
+    end if;
+  end process;
+  
+  process(change_master, slave_in, master_found_r, selected_master_r)
+    begin
+      master_found <= master_found_r;
+      selected_master <= selected_master_r;
+      if (change_master = '1') then
+        master_found <= '0';
+        for i in 0 to (NUM_OF_MASTERS - 1) loop
+          if (slave_in(i).chip_select = '1') then
+            master_found <= '1';
+            selected_master <= i;
+            exit;
+          end if;
+        end loop;
+      end if;
+  end process;
+  
+end generate; -- hrt arbitration  
+
+pd: if (SIMPLE_ARBITRATION = 1 or HRT_ARBITRATION = 1) generate
+  
+  -- allow the granted master to write to the bus downstream
+  AVM_M1_READ       <= slave_in(selected_master).read and master_found;
+  AVM_M1_WRITE      <= slave_in(selected_master).write and master_found;
+  AVM_M1_WRITEDATA  <= slave_in(selected_master).write_data;
+  AVM_M1_BYTEENABLE <= slave_in(selected_master).byte_enable;
+
+  -- connect signals for all slaves to their input/output ports
+  slave_in(0).chip_select     <= AVS_S0_CHIPSELECT;
+  slave_in(0).read            <= AVS_S0_READ;
+  slave_in(0).write           <= AVS_S0_WRITE;
+  slave_in(0).address         <= AVS_S0_ADDRESS;
+  slave_in(0).write_data      <= AVS_S0_WRITEDATA;
+  slave_in(0).byte_enable     <= AVS_S0_BYTEENABLE;  
+  AVS_S0_WAITREQUEST           <= slave_out(0).wait_req;
+  AVS_S0_READDATAVALID         <= slave_out(0).read_valid;
+  AVS_S0_READDATA              <= slave_out(0).read_data;
+
+  slave_in(1).chip_select     <= AVS_S1_CHIPSELECT;
+  slave_in(1).read            <= AVS_S1_READ;
+  slave_in(1).write           <= AVS_S1_WRITE;
+  slave_in(1).address         <= AVS_S1_ADDRESS;
+  slave_in(1).write_data      <= AVS_S1_WRITEDATA;
+  slave_in(1).byte_enable     <= AVS_S1_BYTEENABLE;  
+  AVS_S1_WAITREQUEST           <= slave_out(1).wait_req;
+  AVS_S1_READDATAVALID         <= slave_out(1).read_valid;
+  AVS_S1_READDATA              <= slave_out(1).read_data;
+
+  slave_in(2).chip_select     <= AVS_S2_CHIPSELECT;
+  slave_in(2).read            <= AVS_S2_READ;
+  slave_in(2).write           <= AVS_S2_WRITE;
+  slave_in(2).address         <= AVS_S2_ADDRESS;
+  slave_in(2).write_data      <= AVS_S2_WRITEDATA;
+  slave_in(2).byte_enable     <= AVS_S2_BYTEENABLE;  
+  AVS_S2_WAITREQUEST           <= slave_out(2).wait_req;
+  AVS_S2_READDATAVALID         <= slave_out(2).read_valid;
+  AVS_S2_READDATA              <= slave_out(2).read_data;
+
+  slave_in(3).chip_select     <= AVS_S3_CHIPSELECT;
+  slave_in(3).read            <= AVS_S3_READ;
+  slave_in(3).write           <= AVS_S3_WRITE;
+  slave_in(3).address         <= AVS_S3_ADDRESS;
+  slave_in(3).write_data      <= AVS_S3_WRITEDATA;
+  slave_in(3).byte_enable     <= AVS_S3_BYTEENABLE;  
+  AVS_S3_WAITREQUEST           <= slave_out(3).wait_req;
+  AVS_S3_READDATAVALID         <= slave_out(3).read_valid;
+  AVS_S3_READDATA              <= slave_out(3).read_data;
+  
+  process(slave_in, AVM_M1_WAITREQUEST, selected_master, selected_master_r, AVM_M1_READDATA, AVM_M1_READDATAVALID, master_found)
+    begin      
+      for i in NUM_OF_MASTERS - 1 downto 0 loop
+        slave_out(i).wait_req <= '1';
+        slave_out(i).read_valid <= '0';
+        slave_out(i).read_data <= (others => '0');
+      end loop;
+      
+      if ( master_found = '1') then
+        slave_out(selected_master).wait_req <= AVM_M1_WAITREQUEST ;
+      end if;
+      
+      
+      slave_out(selected_master_r).read_valid <= AVM_M1_READDATAVALID; -- IMPORTANT: I can do this since I know that the downstream memory responds in 1 clock cycle. If it is an SDRAM or a slower memory, I have to remember
+      slave_out(selected_master_r).read_data <= AVM_M1_READDATA;      -- the sequence of granted masters and distribute the received data from the downstream memory accordingly.
+  end process;
+
+
+  AVM_M1_ADDRESS((MASTER_ADDR_WIDTH - 1) DOWNTO 2) <= slave_in(selected_master).address;
+  AVM_M1_ADDRESS(1 downto 0)   <= "00" when (slave_in(selected_master).byte_enable = "0001") or
+  (slave_in(selected_master).byte_enable = "1111") else
+  "01" when (slave_in(selected_master).byte_enable = "0010") or
+  (slave_in(selected_master).byte_enable = "0011") else
+  "10" when (slave_in(selected_master).byte_enable = "0100") or
+  (slave_in(selected_master).byte_enable = "1100") else
+  "11" when (slave_in(selected_master).byte_enable = "1000") else
+  "00" ;
+   
+end generate;
+end architecture;

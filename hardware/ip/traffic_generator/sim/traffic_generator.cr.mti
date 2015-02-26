@@ -1,0 +1,36 @@
+C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd {0 {vcom -work work -2002 -explicit C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd
+Model Technology ModelSim ALTERA vcom 10.1b Compiler 2012.04 Apr 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_traffic_gen
+-- Compiling architecture behave of tb_traffic_gen
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(38): (vcom-1136) Unknown identifier "MASTER_ADDR_WIDTH".
+
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(38): Bad expression in left bound of range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(38): Type error in range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(41): (vcom-1136) Unknown identifier "DATA_WIDTH".
+
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(41): Bad expression in left bound of range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(41): Type error in range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(42): (vcom-1136) Unknown identifier "BYTE_ENABLE_BITS".
+
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(42): Bad expression in left bound of range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(42): Type error in range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(44): (vcom-1136) Unknown identifier "DATA_WIDTH".
+
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(44): Bad expression in left bound of range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(44): Type error in range expression.
+** Error: C:/Projects/shah/SOPC_Components/traffic_generator/sim/tb_traffic_Gen.vhd(54): near "EOF": expecting ';'
+
+} {9.0 10.0 11.0 14.0 15.0 18.0 19.0 22.0 23.0 26.0} {}} C:/Projects/shah/SOPC_Components/traffic_generator/top/traffic_gen.vhd {1 {vcom -work work -2002 -explicit {C:\Projects\shah\SOPC_Components\traffic_generator\top\traffic_gen.vhd}
+Model Technology ModelSim ALTERA vcom 10.1b Compiler 2012.04 Apr 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity traffic_gen
+-- Compiling architecture behave of traffic_gen
+
+} {} {}}

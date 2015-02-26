@@ -1,0 +1,850 @@
+ -- Copyright (C) 1991-2012 Altera Corporation
+ -- Your use of Altera Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files from any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Altera Program License 
+ -- Subscription Agreement, Altera MegaCore Function License 
+ -- Agreement, or other applicable license agreement, including, 
+ -- without limitation, that your use is for the sole purpose of 
+ -- programming logic devices manufactured by Altera and sold by 
+ -- Altera or its authorized distributors.  Please refer to the 
+ -- applicable agreement for further details.
+ -- 
+ -- This is a Quartus II output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus II input file. This file cannot be used
+ -- to make Quartus II pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus II help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- DNU           : Do Not Use. This pin MUST NOT be connected.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ --					Bank 1:		2.5V
+ --					Bank 2:		2.5V
+ --					Bank 3:		2.5V
+ --					Bank 4:		2.5V
+ --					Bank 5:		2.5V
+ --					Bank 6:		2.5V
+ --					Bank 7:		2.5V
+ --					Bank 8:		2.5V
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --					It can also be used to report unused dedicated pins. The connection
+ --					on the board for unused dedicated pins depends on whether this will
+ --					be used in a future design. One example is device migration. When
+ --					using device migration, refer to the device pin-tables. If it is a
+ --					GND pin in the pin table or if it will not be used in a future design
+ --					for another purpose the it MUST be connected to GND. If it is an unused
+ --					dedicated pin, then it can be connected to a valid signal on the board
+ --					(low, high, or toggling) if that signal is required for a different
+ --					revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --					This pin should be connected to GND. It may also be connected  to a
+ --					valid signal  on the board  (low, high, or toggling)  if that signal
+ --					is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin. Connect each pin marked GND* directly to GND
+ --           	    or leave it unconnected.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ -- RESERVED_OUTPUT_DRIVEN_HIGH        : Pin is output driven high.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- Pin directions (input, output or bidir) are based on device operating in user mode.
+ ---------------------------------------------------------------------------------
+
+Quartus II 64-Bit Version 12.1 Build 177 11/07/2012 SJ Web Edition
+CHIP  "prio_arbiter"  ASSIGNED TO AN: EP3C120F780C7
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+VCCIO8                       : A2        : power  :                   : 2.5V    : 8         :                
+AVS_S2_WRITEDATA[20]         : A3        : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[29]         : A4        : input  : 2.5 V             :         : 8         : N              
+VCCIO8                       : A5        : power  :                   : 2.5V    : 8         :                
+AVS_S1_WRITEDATA[26]         : A6        : input  : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[6]          : A7        : output : 2.5 V             :         : 8         : N              
+AVS_S0_ADDRESS[20]           : A8        : input  : 2.5 V             :         : 8         : N              
+VCCIO8                       : A9        : power  :                   : 2.5V    : 8         :                
+AVS_S3_WRITEDATA[6]          : A10       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[3]          : A11       : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[26]         : A12       : input  : 2.5 V             :         : 8         : N              
+VCCIO8                       : A13       : power  :                   : 2.5V    : 8         :                
+GND+                         : A14       :        :                   :         : 8         :                
+GND+                         : A15       :        :                   :         : 7         :                
+VCCIO7                       : A16       : power  :                   : 2.5V    : 7         :                
+AVS_S3_READDATA[3]           : A17       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[10]          : A18       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[9]           : A19       : output : 2.5 V             :         : 7         : N              
+VCCIO7                       : A20       : power  :                   : 2.5V    : 7         :                
+AVS_S3_READDATA[10]          : A21       : output : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : A22       :        :                   :         : 7         :                
+AVS_S3_READDATA[20]          : A23       : output : 2.5 V             :         : 7         : N              
+VCCIO7                       : A24       : power  :                   : 2.5V    : 7         :                
+AVS_S3_READDATA[18]          : A25       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[20]          : A26       : output : 2.5 V             :         : 7         : N              
+VCCIO7                       : A27       : power  :                   : 2.5V    : 7         :                
+VCCIO2                       : AA1       : power  :                   : 2.5V    : 2         :                
+GND                          : AA2       : gnd    :                   :         :           :                
+AVS_S3_BYTEENABLE[0]         : AA3       : input  : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA4       :        :                   :         : 2         :                
+AVS_S1_BYTEENABLE[0]         : AA5       : input  : 2.5 V             :         : 2         : N              
+AVM_M1_BYTEENABLE[1]         : AA6       : output : 2.5 V             :         : 2         : N              
+AVS_S1_WRITEDATA[21]         : AA7       : input  : 2.5 V             :         : 2         : N              
+AVS_S3_ADDRESS[19]           : AA8       : input  : 2.5 V             :         : 3         : N              
+GNDA1                        : AA9       : gnd    :                   :         :           :                
+AVS_S3_ADDRESS[21]           : AA10      : input  : 2.5 V             :         : 3         : N              
+VCCIO3                       : AA11      : power  :                   : 2.5V    : 3         :                
+AVS_S2_ADDRESS[5]            : AA12      : input  : 2.5 V             :         : 3         : N              
+AVM_M1_ADDRESS[7]            : AA13      : output : 2.5 V             :         : 3         : N              
+AVM_M1_ADDRESS[4]            : AA14      : output : 2.5 V             :         : 3         : N              
+AVS_S1_ADDRESS[16]           : AA15      : input  : 2.5 V             :         : 4         : N              
+AVM_M1_ADDRESS[17]           : AA16      : output : 2.5 V             :         : 4         : N              
+AVS_S3_ADDRESS[6]            : AA17      : input  : 2.5 V             :         : 4         : N              
+VCCIO4                       : AA18      : power  :                   : 2.5V    : 4         :                
+AVM_M1_READDATA[17]          : AA19      : input  : 2.5 V             :         : 4         : N              
+GNDA4                        : AA20      : gnd    :                   :         :           :                
+AVS_S1_READDATA[25]          : AA21      : output : 2.5 V             :         : 4         : N              
+AVS_S3_READDATA[30]          : AA22      : output : 2.5 V             :         : 5         : N              
+AVS_S3_READDATA[23]          : AA23      : output : 2.5 V             :         : 5         : N              
+AVS_S3_READDATA[24]          : AA24      : output : 2.5 V             :         : 5         : N              
+AVS_S2_ADDRESS[23]           : AA25      : input  : 2.5 V             :         : 5         : N              
+AVS_S1_WRITEDATA[27]         : AA26      : input  : 2.5 V             :         : 5         : N              
+GND                          : AA27      : gnd    :                   :         :           :                
+VCCIO5                       : AA28      : power  :                   : 2.5V    : 5         :                
+AVS_S3_READDATA[27]          : AB1       : output : 2.5 V             :         : 2         : N              
+AVS_S3_READDATA[31]          : AB2       : output : 2.5 V             :         : 2         : N              
+AVS_S3_READDATAVALID         : AB3       : output : 2.5 V             :         : 2         : N              
+AVS_S2_WAITREQUEST           : AB4       : output : 2.5 V             :         : 2         : N              
+AVS_S1_BYTEENABLE[2]         : AB5       : input  : 2.5 V             :         : 2         : N              
+AVM_M1_BYTEENABLE[2]         : AB6       : output : 2.5 V             :         : 2         : N              
+AVM_M1_WRITEDATA[17]         : AB7       : output : 2.5 V             :         : 3         : N              
+AVM_M1_ADDRESS[21]           : AB8       : output : 2.5 V             :         : 3         : N              
+AVM_M1_ADDRESS[23]           : AB9       : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB10      :        :                   :         : 3         :                
+AVS_S3_WRITEDATA[17]         : AB11      : input  : 2.5 V             :         : 3         : N              
+AVS_S0_WRITEDATA[8]          : AB12      : input  : 2.5 V             :         : 3         : N              
+AVM_M1_ADDRESS[5]            : AB13      : output : 2.5 V             :         : 3         : N              
+AVS_S3_ADDRESS[2]            : AB14      : input  : 2.5 V             :         : 3         : N              
+AVS_S0_ADDRESS[0]            : AB15      : input  : 2.5 V             :         : 4         : N              
+AVM_M1_ADDRESS[20]           : AB16      : output : 2.5 V             :         : 4         : N              
+AVS_S3_ADDRESS[0]            : AB17      : input  : 2.5 V             :         : 4         : N              
+AVS_S3_READDATA[16]          : AB18      : output : 2.5 V             :         : 4         : N              
+AVS_S3_READDATA[14]          : AB19      : output : 2.5 V             :         : 4         : N              
+AVM_M1_READDATA[16]          : AB20      : input  : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB21      :        :                   :         : 4         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB22      :        :                   :         : 4         :                
+AVM_M1_READDATA[30]          : AB23      : input  : 2.5 V             :         : 5         : N              
+AVM_M1_READDATA[25]          : AB24      : input  : 2.5 V             :         : 5         : N              
+AVM_M1_ADDRESS[25]           : AB25      : output : 2.5 V             :         : 5         : N              
+AVS_S0_ADDRESS[23]           : AB26      : input  : 2.5 V             :         : 5         : N              
+AVS_S2_WRITEDATA[12]         : AB27      : input  : 2.5 V             :         : 5         : N              
+AVS_S1_WRITEDATA[10]         : AB28      : input  : 2.5 V             :         : 5         : N              
+AVM_M1_READDATA[26]          : AC1       : input  : 2.5 V             :         : 2         : N              
+AVM_M1_READDATA[28]          : AC2       : input  : 2.5 V             :         : 2         : N              
+AVS_S1_READDATAVALID         : AC3       : output : 2.5 V             :         : 2         : N              
+AVS_S0_WRITEDATA[21]         : AC4       : input  : 2.5 V             :         : 2         : N              
+AVS_S0_BYTEENABLE[2]         : AC5       : input  : 2.5 V             :         : 2         : N              
+GND                          : AC6       : gnd    :                   :         :           :                
+AVM_M1_ADDRESS[16]           : AC7       : output : 2.5 V             :         : 3         : N              
+AVS_S0_ADDRESS[17]           : AC8       : input  : 2.5 V             :         : 3         : N              
+GND                          : AC9       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC10      :        :                   :         : 3         :                
+AVM_M1_WRITEDATA[22]         : AC11      : output : 2.5 V             :         : 3         : N              
+AVS_S2_ADDRESS[2]            : AC12      : input  : 2.5 V             :         : 3         : N              
+GND                          : AC13      : gnd    :                   :         :           :                
+AVS_S1_WRITEDATA[2]          : AC14      : input  : 2.5 V             :         : 3         : N              
+AVS_S0_ADDRESS[4]            : AC15      : input  : 2.5 V             :         : 4         : N              
+GND                          : AC16      : gnd    :                   :         :           :                
+AVS_S2_ADDRESS[1]            : AC17      : input  : 2.5 V             :         : 4         : N              
+AVS_S2_ADDRESS[15]           : AC18      : input  : 2.5 V             :         : 4         : N              
+AVS_S0_READDATA[16]          : AC19      : output : 2.5 V             :         : 4         : N              
+GND                          : AC20      : gnd    :                   :         :           :                
+AVS_S2_READDATA[17]          : AC21      : output : 2.5 V             :         : 4         : N              
+AVS_S0_READDATA[23]          : AC22      : output : 2.5 V             :         : 4         : N              
+GND                          : AC23      : gnd    :                   :         :           :                
+AVS_S0_READDATA[25]          : AC24      : output : 2.5 V             :         : 5         : N              
+AVS_S0_READDATA[24]          : AC25      : output : 2.5 V             :         : 5         : N              
+AVM_M1_READDATA[23]          : AC26      : input  : 2.5 V             :         : 5         : N              
+AVM_M1_WRITEDATA[25]         : AC27      : output : 2.5 V             :         : 5         : N              
+AVS_S3_WRITEDATA[25]         : AC28      : input  : 2.5 V             :         : 5         : N              
+AVS_S2_READDATAVALID         : AD1       : output : 2.5 V             :         : 2         : N              
+AVM_M1_READDATAVALID         : AD2       : input  : 2.5 V             :         : 2         : N              
+AVS_S0_READDATAVALID         : AD3       : output : 2.5 V             :         : 2         : N              
+AVS_S3_BYTEENABLE[2]         : AD4       : input  : 2.5 V             :         : 3         : N              
+AVM_M1_ADDRESS[1]            : AD5       : output : 2.5 V             :         : 3         : N              
+VCCIO3                       : AD6       : power  :                   : 2.5V    : 3         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD7       :        :                   :         : 3         :                
+AVS_S2_ADDRESS[21]           : AD8       : input  : 2.5 V             :         : 3         : N              
+VCCIO3                       : AD9       : power  :                   : 2.5V    : 3         :                
+AVS_S1_ADDRESS[14]           : AD10      : input  : 2.5 V             :         : 3         : N              
+AVM_M1_WRITEDATA[2]          : AD11      : output : 2.5 V             :         : 3         : N              
+AVM_M1_WRITEDATA[8]          : AD12      : output : 2.5 V             :         : 3         : N              
+VCCIO3                       : AD13      : power  :                   : 2.5V    : 3         :                
+AVS_S1_ADDRESS[4]            : AD14      : input  : 2.5 V             :         : 3         : N              
+AVS_S1_ADDRESS[3]            : AD15      : input  : 2.5 V             :         : 4         : N              
+VCCIO4                       : AD16      : power  :                   : 2.5V    : 4         :                
+AVS_S3_ADDRESS[18]           : AD17      : input  : 2.5 V             :         : 4         : N              
+AVS_S2_ADDRESS[22]           : AD18      : input  : 2.5 V             :         : 4         : N              
+AVS_S0_READDATA[12]          : AD19      : output : 2.5 V             :         : 4         : N              
+VCCIO4                       : AD20      : power  :                   : 2.5V    : 4         :                
+AVS_S1_READDATA[12]          : AD21      : output : 2.5 V             :         : 4         : N              
+AVS_S2_READDATA[23]          : AD22      : output : 2.5 V             :         : 4         : N              
+VCCIO4                       : AD23      : power  :                   : 2.5V    : 4         :                
+AVS_S3_READDATA[17]          : AD24      : output : 2.5 V             :         : 4         : N              
+AVS_S0_READDATA[14]          : AD25      : output : 2.5 V             :         : 4         : N              
+AVS_S0_READDATA[30]          : AD26      : output : 2.5 V             :         : 5         : N              
+AVS_S3_ADDRESS[13]           : AD27      : input  : 2.5 V             :         : 5         : N              
+AVS_S2_READDATA[25]          : AD28      : output : 2.5 V             :         : 5         : N              
+AVS_S1_WAITREQUEST           : AE1       : output : 2.5 V             :         : 2         : N              
+AVS_S3_WAITREQUEST           : AE2       : output : 2.5 V             :         : 2         : N              
+AVS_S3_BYTEENABLE[3]         : AE3       : input  : 2.5 V             :         : 2         : N              
+AVS_S0_BYTEENABLE[1]         : AE4       : input  : 2.5 V             :         : 3         : N              
+AVS_S1_WRITEDATA[17]         : AE5       : input  : 2.5 V             :         : 3         : N              
+AVM_M1_WRITEDATA[21]         : AE6       : output : 2.5 V             :         : 3         : N              
+AVS_S2_ADDRESS[19]           : AE7       : input  : 2.5 V             :         : 3         : N              
+AVS_S0_WRITEDATA[31]         : AE8       : input  : 2.5 V             :         : 3         : N              
+AVS_S0_WRITEDATA[17]         : AE9       : input  : 2.5 V             :         : 3         : N              
+AVS_S2_ADDRESS[14]           : AE10      : input  : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE11      :        :                   :         : 3         :                
+AVM_M1_ADDRESS[3]            : AE12      : output : 2.5 V             :         : 3         : N              
+AVS_S0_WRITEDATA[2]          : AE13      : input  : 2.5 V             :         : 3         : N              
+AVS_S2_ADDRESS[4]            : AE14      : input  : 2.5 V             :         : 3         : N              
+AVS_S1_WRITEDATA[8]          : AE15      : input  : 2.5 V             :         : 4         : N              
+AVS_S1_ADDRESS[22]           : AE16      : input  : 2.5 V             :         : 4         : N              
+AVM_M1_ADDRESS[18]           : AE17      : output : 2.5 V             :         : 4         : N              
+AVS_S2_ADDRESS[0]            : AE18      : input  : 2.5 V             :         : 4         : N              
+AVS_S2_ADDRESS[18]           : AE19      : input  : 2.5 V             :         : 4         : N              
+AVS_S1_ADDRESS[0]            : AE20      : input  : 2.5 V             :         : 4         : N              
+AVS_S2_WRITEDATA[24]         : AE21      : input  : 2.5 V             :         : 4         : N              
+AVS_S1_READDATA[16]          : AE22      : output : 2.5 V             :         : 4         : N              
+AVS_S0_READDATA[17]          : AE23      : output : 2.5 V             :         : 4         : N              
+AVS_S2_READDATA[12]          : AE24      : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE25      :        :                   :         : 4         :                
+AVS_S1_READDATA[24]          : AE26      : output : 2.5 V             :         : 5         : N              
+AVS_S3_READDATA[25]          : AE27      : output : 2.5 V             :         : 5         : N              
+AVM_M1_READDATA[24]          : AE28      : input  : 2.5 V             :         : 5         : N              
+GND                          : AF1       : gnd    :                   :         :           :                
+AVM_M1_BYTEENABLE[3]         : AF2       : output : 2.5 V             :         : 2         : N              
+AVS_S0_ADDRESS[14]           : AF3       : input  : 2.5 V             :         : 3         : N              
+AVS_S0_BYTEENABLE[0]         : AF4       : input  : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF5       :        :                   :         : 3         :                
+AVS_S3_ADDRESS[20]           : AF6       : input  : 2.5 V             :         : 3         : N              
+AVS_S1_ADDRESS[21]           : AF7       : input  : 2.5 V             :         : 3         : N              
+AVS_S2_WRITEDATA[17]         : AF8       : input  : 2.5 V             :         : 3         : N              
+AVS_S3_ADDRESS[14]           : AF9       : input  : 2.5 V             :         : 3         : N              
+AVS_S1_WRITEDATA[31]         : AF10      : input  : 2.5 V             :         : 3         : N              
+AVS_S3_ADDRESS[17]           : AF11      : input  : 2.5 V             :         : 3         : N              
+AVS_S1_ADDRESS[1]            : AF12      : input  : 2.5 V             :         : 3         : N              
+AVS_S2_ADDRESS[3]            : AF13      : input  : 2.5 V             :         : 3         : N              
+AVS_S3_WRITEDATA[22]         : AF14      : input  : 2.5 V             :         : 3         : N              
+AVS_S1_ADDRESS[2]            : AF15      : input  : 2.5 V             :         : 4         : N              
+AVS_S1_ADDRESS[18]           : AF16      : input  : 2.5 V             :         : 4         : N              
+AVM_M1_WRITEDATA[24]         : AF17      : output : 2.5 V             :         : 4         : N              
+AVS_S0_ADDRESS[18]           : AF18      : input  : 2.5 V             :         : 4         : N              
+AVS_S0_ADDRESS[6]            : AF19      : input  : 2.5 V             :         : 4         : N              
+AVS_S1_WRITEDATA[24]         : AF20      : input  : 2.5 V             :         : 4         : N              
+AVS_S2_ADDRESS[16]           : AF21      : input  : 2.5 V             :         : 4         : N              
+AVS_S2_READDATA[16]          : AF22      : output : 2.5 V             :         : 4         : N              
+AVM_M1_READDATA[12]          : AF23      : input  : 2.5 V             :         : 4         : N              
+AVS_S3_WRITEDATA[24]         : AF24      : input  : 2.5 V             :         : 4         : N              
+AVS_S0_ADDRESS[15]           : AF25      : input  : 2.5 V             :         : 4         : N              
+AVS_S0_ADDRESS[1]            : AF26      : input  : 2.5 V             :         : 4         : N              
+AVS_S2_READDATA[30]          : AF27      : output : 2.5 V             :         : 5         : N              
+GND                          : AF28      : gnd    :                   :         :           :                
+VCCIO2                       : AG1       : power  :                   : 2.5V    : 2         :                
+GND                          : AG2       : gnd    :                   :         :           :                
+AVS_S2_WRITEDATA[21]         : AG3       : input  : 2.5 V             :         : 3         : N              
+AVS_S2_ADDRESS[20]           : AG4       : input  : 2.5 V             :         : 3         : N              
+GND                          : AG5       : gnd    :                   :         :           :                
+AVS_S2_ADDRESS[17]           : AG6       : input  : 2.5 V             :         : 3         : N              
+AVS_S0_ADDRESS[19]           : AG7       : input  : 2.5 V             :         : 3         : N              
+AVS_S2_WRITEDATA[31]         : AG8       : input  : 2.5 V             :         : 3         : N              
+GND                          : AG9       : gnd    :                   :         :           :                
+AVS_S3_WRITEDATA[31]         : AG10      : input  : 2.5 V             :         : 3         : N              
+AVS_S1_WRITEDATA[22]         : AG11      : input  : 2.5 V             :         : 3         : N              
+AVS_S2_WRITEDATA[2]          : AG12      : input  : 2.5 V             :         : 3         : N              
+GND                          : AG13      : gnd    :                   :         :           :                
+AVS_S0_ADDRESS[3]            : AG14      : input  : 2.5 V             :         : 3         : N              
+AVS_S3_ADDRESS[4]            : AG15      : input  : 2.5 V             :         : 4         : N              
+GND                          : AG16      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG17      :        :                   :         : 4         :                
+AVS_S1_ADDRESS[6]            : AG18      : input  : 2.5 V             :         : 4         : N              
+AVM_M1_ADDRESS[24]           : AG19      : output : 2.5 V             :         : 4         : N              
+GND                          : AG20      : gnd    :                   :         :           :                
+AVS_S2_ADDRESS[6]            : AG21      : input  : 2.5 V             :         : 4         : N              
+AVS_S0_ADDRESS[22]           : AG22      : input  : 2.5 V             :         : 4         : N              
+AVS_S1_ADDRESS[15]           : AG23      : input  : 2.5 V             :         : 4         : N              
+GND                          : AG24      : gnd    :                   :         :           :                
+AVS_S2_READDATA[14]          : AG25      : output : 2.5 V             :         : 4         : N              
+AVS_S1_READDATA[30]          : AG26      : output : 2.5 V             :         : 4         : N              
+GND                          : AG27      : gnd    :                   :         :           :                
+VCCIO5                       : AG28      : power  :                   : 2.5V    : 5         :                
+VCCIO3                       : AH2       : power  :                   : 2.5V    : 3         :                
+AVM_M1_ADDRESS[22]           : AH3       : output : 2.5 V             :         : 3         : N              
+AVS_S0_ADDRESS[21]           : AH4       : input  : 2.5 V             :         : 3         : N              
+VCCIO3                       : AH5       : power  :                   : 2.5V    : 3         :                
+AVS_S1_ADDRESS[19]           : AH6       : input  : 2.5 V             :         : 3         : N              
+AVM_M1_WRITEDATA[31]         : AH7       : output : 2.5 V             :         : 3         : N              
+AVS_S1_ADDRESS[17]           : AH8       : input  : 2.5 V             :         : 3         : N              
+VCCIO3                       : AH9       : power  :                   : 2.5V    : 3         :                
+AVS_S3_ADDRESS[1]            : AH10      : input  : 2.5 V             :         : 3         : N              
+AVS_S2_WRITEDATA[22]         : AH11      : input  : 2.5 V             :         : 3         : N              
+AVS_S3_ADDRESS[5]            : AH12      : input  : 2.5 V             :         : 3         : N              
+VCCIO3                       : AH13      : power  :                   : 2.5V    : 3         :                
+AVS_S3_ADDRESS[3]            : AH14      : input  : 2.5 V             :         : 3         : N              
+AVS_S1_ADDRESS[5]            : AH15      : input  : 2.5 V             :         : 4         : N              
+VCCIO4                       : AH16      : power  :                   : 2.5V    : 4         :                
+AVS_S0_ADDRESS[16]           : AH17      : input  : 2.5 V             :         : 4         : N              
+AVM_M1_ADDRESS[8]            : AH18      : output : 2.5 V             :         : 4         : N              
+AVM_M1_ADDRESS[2]            : AH19      : output : 2.5 V             :         : 4         : N              
+VCCIO4                       : AH20      : power  :                   : 2.5V    : 4         :                
+AVS_S0_WRITEDATA[24]         : AH21      : input  : 2.5 V             :         : 4         : N              
+AVS_S3_ADDRESS[15]           : AH22      : input  : 2.5 V             :         : 4         : N              
+AVS_S3_ADDRESS[16]           : AH23      : input  : 2.5 V             :         : 4         : N              
+VCCIO4                       : AH24      : power  :                   : 2.5V    : 4         :                
+AVS_S1_READDATA[17]          : AH25      : output : 2.5 V             :         : 4         : N              
+AVS_S2_READDATA[24]          : AH26      : output : 2.5 V             :         : 4         : N              
+VCCIO4                       : AH27      : power  :                   : 2.5V    : 4         :                
+VCCIO1                       : B1        : power  :                   : 2.5V    : 1         :                
+GND                          : B2        : gnd    :                   :         :           :                
+AVM_M1_WRITEDATA[20]         : B3        : output : 2.5 V             :         : 8         : N              
+AVS_S1_ADDRESS[20]           : B4        : input  : 2.5 V             :         : 8         : N              
+GND                          : B5        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : B6        :        :                   :         : 8         :                
+AVM_M1_WRITEDATA[26]         : B7        : output : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[19]         : B8        : input  : 2.5 V             :         : 8         : N              
+GND                          : B9        : gnd    :                   :         :           :                
+AVS_S0_WRITEDATA[3]          : B10       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[4]          : B11       : input  : 2.5 V             :         : 8         : N              
+AVS_S1_WRITEDATA[6]          : B12       : input  : 2.5 V             :         : 8         : N              
+GND                          : B13       : gnd    :                   :         :           :                
+GND+                         : B14       :        :                   :         : 8         :                
+GND+                         : B15       :        :                   :         : 7         :                
+GND                          : B16       : gnd    :                   :         :           :                
+AVS_S2_READDATA[29]          : B17       : output : 2.5 V             :         : 7         : N              
+AVS_S3_READDATA[11]          : B18       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[15]          : B19       : output : 2.5 V             :         : 7         : N              
+GND                          : B20       : gnd    :                   :         :           :                
+AVM_M1_READDATA[15]          : B21       : input  : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[9]           : B22       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[20]          : B23       : output : 2.5 V             :         : 7         : N              
+GND                          : B24       : gnd    :                   :         :           :                
+AVM_M1_READDATA[21]          : B25       : input  : 2.5 V             :         : 7         : N              
+AVM_M1_WRITE                 : B26       : output : 2.5 V             :         : 7         : N              
+GND                          : B27       : gnd    :                   :         :           :                
+VCCIO6                       : B28       : power  :                   : 2.5V    : 6         :                
+GND                          : C1        : gnd    :                   :         :           :                
+AVS_S0_READDATA[19]          : C2        : output : 2.5 V             :         : 1         : N              
+AVS_S0_WRITEDATA[18]         : C3        : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[29]         : C4        : input  : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[18]         : C5        : output : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[18]         : C6        : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[19]         : C7        : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[16]         : C8        : input  : 2.5 V             :         : 8         : N              
+AVS_S1_WRITEDATA[20]         : C9        : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[26]         : C10       : input  : 2.5 V             :         : 8         : N              
+AVS_S1_WRITEDATA[29]         : C11       : input  : 2.5 V             :         : 8         : N              
+AVS_S1_WRITEDATA[7]          : C12       : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[3]          : C13       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[7]          : C14       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[8]          : C15       : input  : 2.5 V             :         : 7         : N              
+AVS_S3_READDATA[5]           : C16       : output : 2.5 V             :         : 7         : N              
+AVS_S3_READDATA[15]          : C17       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[11]          : C18       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[9]           : C19       : output : 2.5 V             :         : 7         : N              
+AVM_M1_READDATA[11]          : C20       : input  : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C21       :        :                   :         : 7         :                
+AVS_S3_READDATA[21]          : C22       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[22]          : C23       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[22]          : C24       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[18]          : C25       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READ                  : C26       : input  : 2.5 V             :         : 7         : N              
+AVM_M1_READDATA[1]           : C27       : input  : 2.5 V             :         : 6         : N              
+GND                          : C28       : gnd    :                   :         :           :                
+AVS_S1_READDATA[7]           : D1        : output : 2.5 V             :         : 1         : N              
+AVS_S2_READDATA[19]          : D2        : output : 2.5 V             :         : 1         : N              
+AVS_S1_READDATA[6]           : D3        : output : 2.5 V             :         : 1         : N              
+AVM_M1_WRITEDATA[16]         : D4        : output : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[19]         : D5        : output : 2.5 V             :         : 8         : N              
+AVS_S1_WRITEDATA[28]         : D6        : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[30]         : D7        : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[16]         : D8        : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[18]         : D9        : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[6]          : D10       : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[28]         : D11       : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[7]          : D12       : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[4]          : D13       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[26]         : D14       : input  : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : D15       :        :                   :         : 7         :                
+AVM_M1_READDATA[3]           : D16       : input  : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[11]          : D17       : output : 2.5 V             :         : 7         : N              
+AVM_M1_READDATA[9]           : D18       : input  : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[15]          : D19       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[15]          : D20       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[21]          : D21       : output : 2.5 V             :         : 7         : N              
+AVM_M1_READDATA[18]          : D22       : input  : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[21]          : D23       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[21]          : D24       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[22]          : D25       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[13]          : D26       : output : 2.5 V             :         : 6         : N              
+AVS_S3_READDATA[0]           : D27       : output : 2.5 V             :         : 6         : N              
+AVS_S2_READDATA[13]          : D28       : output : 2.5 V             :         : 6         : N              
+AVS_S3_READDATA[6]           : E1        : output : 2.5 V             :         : 1         : N              
+~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : E2        : input  : 2.5 V             :         : 1         : N              
+AVM_M1_READDATA[7]           : E3        : input  : 2.5 V             :         : 1         : N              
+AVM_M1_WRITEDATA[29]         : E4        : output : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : E5        :        :                   :         : 8         :                
+VCCIO8                       : E6        : power  :                   : 2.5V    : 8         :                
+AVS_S3_WRITEDATA[30]         : E7        : input  : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[28]         : E8        : output : 2.5 V             :         : 8         : N              
+VCCIO8                       : E9        : power  :                   : 2.5V    : 8         :                
+AVS_S3_WRITEDATA[29]         : E10       : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[7]          : E11       : input  : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[4]          : E12       : output : 2.5 V             :         : 8         : N              
+VCCIO8                       : E13       : power  :                   : 2.5V    : 8         :                
+AVS_S1_WRITEDATA[3]          : E14       : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[22]         : E15       : input  : 2.5 V             :         : 7         : N              
+VCCIO7                       : E16       : power  :                   : 2.5V    : 7         :                
+AVS_S0_READDATA[4]           : E17       : output : 2.5 V             :         : 7         : N              
+AVM_M1_READDATA[10]          : E18       : input  : 2.5 V             :         : 7         : N              
+AVS_S3_READDATA[22]          : E19       : output : 2.5 V             :         : 7         : N              
+VCCIO7                       : E20       : power  :                   : 2.5V    : 7         :                
+AVM_M1_READDATA[20]          : E21       : input  : 2.5 V             :         : 7         : N              
+AVM_M1_READDATA[22]          : E22       : input  : 2.5 V             :         : 7         : N              
+VCCIO7                       : E23       : power  :                   : 2.5V    : 7         :                
+AVS_S3_READDATA[9]           : E24       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[11]          : E25       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[0]           : E26       : output : 2.5 V             :         : 6         : N              
+AVS_S3_READDATA[13]          : E27       : output : 2.5 V             :         : 6         : N              
+AVS_S2_READDATA[1]           : E28       : output : 2.5 V             :         : 6         : N              
+AVS_S2_READDATA[7]           : F1        : output : 2.5 V             :         : 1         : N              
+AVS_S2_READDATA[8]           : F2        : output : 2.5 V             :         : 1         : N              
+AVS_S3_READDATA[7]           : F3        : output : 2.5 V             :         : 1         : N              
+~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : F4        : input  : 2.5 V             :         : 1         : N              
+AVS_S1_READDATA[19]          : F5        : output : 2.5 V             :         : 1         : N              
+GND                          : F6        : gnd    :                   :         :           :                
+AVS_S1_WRITEDATA[16]         : F7        : input  : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[30]         : F8        : output : 2.5 V             :         : 8         : N              
+GND                          : F9        : gnd    :                   :         :           :                
+AVS_S3_WRITEDATA[20]         : F10       : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[5]          : F11       : input  : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[7]          : F12       : output : 2.5 V             :         : 8         : N              
+GND                          : F13       : gnd    :                   :         :           :                
+AVS_S0_WRITEDATA[5]          : F14       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[2]          : F15       : input  : 2.5 V             :         : 7         : N              
+GND                          : F16       : gnd    :                   :         :           :                
+AVS_S0_READDATA[5]           : F17       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[10]          : F18       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[18]          : F19       : output : 2.5 V             :         : 7         : N              
+GND                          : F20       : gnd    :                   :         :           :                
+AVS_S0_READDATA[18]          : F21       : output : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[20]          : F22       : output : 2.5 V             :         : 7         : N              
+GND                          : F23       : gnd    :                   :         :           :                
+AVS_S2_CHIPSELECT            : F24       : input  : 2.5 V             :         : 6         : N              
+AVS_S1_CHIPSELECT            : F25       : input  : 2.5 V             :         : 6         : N              
+AVS_S1_READDATA[1]           : F26       : output : 2.5 V             :         : 6         : N              
+AVS_S1_READDATA[0]           : F27       : output : 2.5 V             :         : 6         : N              
+AVS_S0_READDATA[2]           : F28       : output : 2.5 V             :         : 6         : N              
+AVS_S1_ADDRESS[12]           : G1        : input  : 2.5 V             :         : 1         : N              
+AVS_S3_ADDRESS[12]           : G2        : input  : 2.5 V             :         : 1         : N              
+AVM_M1_READDATA[19]          : G3        : input  : 2.5 V             :         : 1         : N              
+AVS_S0_READDATA[7]           : G4        : output : 2.5 V             :         : 1         : N              
+AVM_M1_READDATA[8]           : G5        : input  : 2.5 V             :         : 1         : N              
+AVS_S2_READDATA[6]           : G6        : output : 2.5 V             :         : 1         : N              
+AVS_S3_WRITEDATA[28]         : G7        : input  : 2.5 V             :         : 8         : N              
+AVS_S1_WRITEDATA[18]         : G8        : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[19]         : G9        : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[20]         : G10       : input  : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[30]         : G11       : input  : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G12       :        :                   :         : 8         :                
+AVS_S1_WRITEDATA[4]          : G13       : input  : 2.5 V             :         : 8         : N              
+AVS_S1_WRITEDATA[5]          : G14       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_READDATA[29]          : G15       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[5]           : G16       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[10]          : G17       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[3]           : G18       : output : 2.5 V             :         : 7         : N              
+AVS_S1_READDATA[4]           : G19       : output : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G20       :        :                   :         : 7         :                
+AVS_S3_ADDRESS[22]           : G21       : input  : 2.5 V             :         : 7         : N              
+AVS_S0_READDATA[3]           : G22       : output : 2.5 V             :         : 7         : N              
+AVS_S2_WRITE                 : G23       : input  : 2.5 V             :         : 6         : N              
+AVS_S1_READ                  : G24       : input  : 2.5 V             :         : 6         : N              
+AVS_S0_CHIPSELECT            : G25       : input  : 2.5 V             :         : 6         : N              
+AVS_S0_WRITE                 : G26       : input  : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G27       :        :                   :         : 6         :                
+AVS_S1_WRITEDATA[13]         : G28       : input  : 2.5 V             :         : 6         : N              
+VCCIO1                       : H1        : power  :                   : 2.5V    : 1         :                
+GND                          : H2        : gnd    :                   :         :           :                
+AVS_S0_READDATA[6]           : H3        : output : 2.5 V             :         : 1         : N              
+AVS_S3_READDATA[8]           : H4        : output : 2.5 V             :         : 1         : N              
+AVS_S0_READDATA[8]           : H5        : output : 2.5 V             :         : 1         : N              
+AVM_M1_READDATA[6]           : H6        : input  : 2.5 V             :         : 1         : N              
+AVS_S1_READDATA[8]           : H7        : output : 2.5 V             :         : 1         : N              
+AVS_S0_WRITEDATA[16]         : H8        : input  : 2.5 V             :         : 8         : N              
+GNDA3                        : H9        : gnd    :                   :         :           :                
+AVS_S0_WRITEDATA[28]         : H10       : input  : 2.5 V             :         : 8         : N              
+VCCIO8                       : H11       : power  :                   : 2.5V    : 8         :                
+AVS_S1_WRITEDATA[30]         : H12       : input  : 2.5 V             :         : 8         : N              
+AVS_S2_WRITEDATA[4]          : H13       : input  : 2.5 V             :         : 8         : N              
+AVS_S3_WRITEDATA[5]          : H14       : input  : 2.5 V             :         : 8         : N              
+AVS_S0_READDATA[29]          : H15       : output : 2.5 V             :         : 7         : N              
+AVS_S3_READDATA[4]           : H16       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[3]           : H17       : output : 2.5 V             :         : 7         : N              
+VCCIO7                       : H18       : power  :                   : 2.5V    : 7         :                
+AVM_M1_READDATA[29]          : H19       : input  : 2.5 V             :         : 7         : N              
+GNDA2                        : H20       : gnd    :                   :         :           :                
+AVS_S1_READDATA[29]          : H21       : output : 2.5 V             :         : 7         : N              
+AVS_S3_WRITE                 : H22       : input  : 2.5 V             :         : 6         : N              
+AVS_S3_READ                  : H23       : input  : 2.5 V             :         : 6         : N              
+AVS_S1_WRITE                 : H24       : input  : 2.5 V             :         : 6         : N              
+AVM_M1_READDATA[13]          : H25       : input  : 2.5 V             :         : 6         : N              
+AVM_M1_READDATA[0]           : H26       : input  : 2.5 V             :         : 6         : N              
+GND                          : H27       : gnd    :                   :         :           :                
+VCCIO6                       : H28       : power  :                   : 2.5V    : 6         :                
+csi_clockreset_RESET_n       : J1        : input  : 2.5 V             :         : 1         : N              
+csi_clockreset_CLK           : J2        : input  : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : J3        :        :                   :         : 1         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : J4        :        :                   :         : 1         :                
+AVS_S0_WRITEDATA[23]         : J5        : input  : 2.5 V             :         : 1         : N              
+AVS_S2_ADDRESS[10]           : J6        : input  : 2.5 V             :         : 1         : N              
+AVS_S0_ADDRESS[7]            : J7        : input  : 2.5 V             :         : 1         : N              
+VCCA3                        : J8        : power  :                   : 2.5V    :           :                
+VCCD_PLL3                    : J9        : power  :                   : 1.2V    :           :                
+AVS_S1_WRITEDATA[19]         : J10       : input  : 2.5 V             :         : 8         : N              
+GND                          : J11       : gnd    :                   :         :           :                
+AVM_M1_WRITEDATA[3]          : J12       : output : 2.5 V             :         : 8         : N              
+AVM_M1_WRITEDATA[5]          : J13       : output : 2.5 V             :         : 8         : N              
+AVS_S0_WRITEDATA[6]          : J14       : input  : 2.5 V             :         : 8         : N              
+AVS_S2_READDATA[4]           : J15       : output : 2.5 V             :         : 7         : N              
+AVS_S2_READDATA[5]           : J16       : output : 2.5 V             :         : 7         : N              
+AVM_M1_READDATA[5]           : J17       : input  : 2.5 V             :         : 7         : N              
+GND                          : J18       : gnd    :                   :         :           :                
+AVM_M1_READDATA[4]           : J19       : input  : 2.5 V             :         : 7         : N              
+VCCD_PLL2                    : J20       : power  :                   : 1.2V    :           :                
+VCCA2                        : J21       : power  :                   : 2.5V    :           :                
+AVM_M1_READ                  : J22       : output : 2.5 V             :         : 6         : N              
+AVS_S1_READDATA[13]          : J23       : output : 2.5 V             :         : 6         : N              
+AVS_S0_READDATA[1]           : J24       : output : 2.5 V             :         : 6         : N              
+AVM_M1_ADDRESS[27]           : J25       : output : 2.5 V             :         : 6         : N              
+AVS_S2_WRITEDATA[1]          : J26       : input  : 2.5 V             :         : 6         : N              
+GND+                         : J27       :        :                   :         : 6         :                
+GND+                         : J28       :        :                   :         : 6         :                
+AVS_S1_ADDRESS[10]           : K1        : input  : 2.5 V             :         : 1         : N              
+AVS_S2_ADDRESS[12]           : K2        : input  : 2.5 V             :         : 1         : N              
+AVS_S1_WRITEDATA[23]         : K3        : input  : 2.5 V             :         : 1         : N              
+AVS_S3_WRITEDATA[0]          : K4        : input  : 2.5 V             :         : 1         : N              
+VCCIO1                       : K5        : power  :                   : 2.5V    : 1         :                
+GND                          : K6        : gnd    :                   :         :           :                
+AVS_S0_ADDRESS[8]            : K7        : input  : 2.5 V             :         : 1         : N              
+AVS_S1_ADDRESS[9]            : K8        : input  : 2.5 V             :         : 1         : N              
+VCCINT                       : K9        : power  :                   : 1.2V    :           :                
+GND                          : K10       : gnd    :                   :         :           :                
+VCCINT                       : K11       : power  :                   : 1.2V    :           :                
+GND                          : K12       : gnd    :                   :         :           :                
+VCCINT                       : K13       : power  :                   : 1.2V    :           :                
+GND                          : K14       : gnd    :                   :         :           :                
+VCCINT                       : K15       : power  :                   : 1.2V    :           :                
+GND                          : K16       : gnd    :                   :         :           :                
+VCCINT                       : K17       : power  :                   : 1.2V    :           :                
+GND                          : K18       : gnd    :                   :         :           :                
+VCCINT                       : K19       : power  :                   : 1.2V    :           :                
+GND                          : K20       : gnd    :                   :         :           :                
+AVS_S2_READ                  : K21       : input  : 2.5 V             :         : 6         : N              
+AVS_S3_CHIPSELECT            : K22       : input  : 2.5 V             :         : 6         : N              
+GND                          : K23       : gnd    :                   :         :           :                
+VCCIO6                       : K24       : power  :                   : 2.5V    : 6         :                
+AVS_S3_READDATA[2]           : K25       : output : 2.5 V             :         : 6         : N              
+AVS_S2_READDATA[2]           : K26       : output : 2.5 V             :         : 6         : N              
+AVS_S3_ADDRESS[8]            : K27       : input  : 2.5 V             :         : 6         : N              
+AVM_M1_WRITEDATA[11]         : K28       : output : 2.5 V             :         : 6         : N              
+AVS_S0_WRITEDATA[0]          : L1        : input  : 2.5 V             :         : 1         : N              
+AVM_M1_ADDRESS[12]           : L2        : output : 2.5 V             :         : 1         : N              
+AVM_M1_WRITEDATA[0]          : L3        : output : 2.5 V             :         : 1         : N              
+AVM_M1_ADDRESS[13]           : L4        : output : 2.5 V             :         : 1         : N              
+AVS_S3_READDATA[19]          : L5        : output : 2.5 V             :         : 1         : N              
+AVS_S1_WRITEDATA[0]          : L6        : input  : 2.5 V             :         : 1         : N              
+AVS_S3_ADDRESS[9]            : L7        : input  : 2.5 V             :         : 1         : N              
+AVM_M1_ADDRESS[11]           : L8        : output : 2.5 V             :         : 1         : N              
+GND                          : L9        : gnd    :                   :         :           :                
+VCCINT                       : L10       : power  :                   : 1.2V    :           :                
+GND                          : L11       : gnd    :                   :         :           :                
+VCCINT                       : L12       : power  :                   : 1.2V    :           :                
+GND                          : L13       : gnd    :                   :         :           :                
+VCCINT                       : L14       : power  :                   : 1.2V    :           :                
+GND                          : L15       : gnd    :                   :         :           :                
+VCCINT                       : L16       : power  :                   : 1.2V    :           :                
+GND                          : L17       : gnd    :                   :         :           :                
+VCCINT                       : L18       : power  :                   : 1.2V    :           :                
+GND                          : L19       : gnd    :                   :         :           :                
+VCCINT                       : L20       : power  :                   : 1.2V    :           :                
+AVS_S3_READDATA[1]           : L21       : output : 2.5 V             :         : 6         : N              
+AVM_M1_READDATA[2]           : L22       : input  : 2.5 V             :         : 6         : N              
+AVS_S0_WRITEDATA[15]         : L23       : input  : 2.5 V             :         : 6         : N              
+AVS_S1_WRITEDATA[9]          : L24       : input  : 2.5 V             :         : 6         : N              
+AVS_S1_READDATA[2]           : L25       : output : 2.5 V             :         : 6         : N              
+AVM_M1_WRITEDATA[9]          : L26       : output : 2.5 V             :         : 6         : N              
+AVS_S1_ADDRESS[24]           : L27       : input  : 2.5 V             :         : 6         : N              
+AVS_S2_WRITEDATA[11]         : L28       : input  : 2.5 V             :         : 6         : N              
+AVS_S3_WRITEDATA[23]         : M1        : input  : 2.5 V             :         : 1         : N              
+AVS_S1_ADDRESS[8]            : M2        : input  : 2.5 V             :         : 1         : N              
+AVS_S2_ADDRESS[9]            : M3        : input  : 2.5 V             :         : 1         : N              
+AVS_S0_ADDRESS[11]           : M4        : input  : 2.5 V             :         : 1         : N              
+AVS_S3_ADDRESS[10]           : M5        : input  : 2.5 V             :         : 1         : N              
+nSTATUS                      : M6        :        :                   :         : 1         :                
+AVS_S3_ADDRESS[11]           : M7        : input  : 2.5 V             :         : 1         : N              
+AVM_M1_ADDRESS[14]           : M8        : output : 2.5 V             :         : 1         : N              
+VCCINT                       : M9        : power  :                   : 1.2V    :           :                
+GND                          : M10       : gnd    :                   :         :           :                
+VCCINT                       : M11       : power  :                   : 1.2V    :           :                
+GND                          : M12       : gnd    :                   :         :           :                
+VCCINT                       : M13       : power  :                   : 1.2V    :           :                
+GND                          : M14       : gnd    :                   :         :           :                
+VCCINT                       : M15       : power  :                   : 1.2V    :           :                
+GND                          : M16       : gnd    :                   :         :           :                
+VCCINT                       : M17       : power  :                   : 1.2V    :           :                
+GND                          : M18       : gnd    :                   :         :           :                
+VCCINT                       : M19       : power  :                   : 1.2V    :           :                
+GND                          : M20       : gnd    :                   :         :           :                
+AVS_S0_READDATA[0]           : M21       : output : 2.5 V             :         : 6         : N              
+MSEL2                        : M22       :        :                   :         : 6         :                
+AVM_M1_WRITEDATA[15]         : M23       : output : 2.5 V             :         : 6         : N              
+AVS_S2_WRITEDATA[9]          : M24       : input  : 2.5 V             :         : 6         : N              
+AVM_M1_WRITEDATA[13]         : M25       : output : 2.5 V             :         : 6         : N              
+AVS_S0_WRITEDATA[13]         : M26       : input  : 2.5 V             :         : 6         : N              
+AVS_S3_WRITEDATA[13]         : M27       : input  : 2.5 V             :         : 6         : N              
+AVS_S2_WRITEDATA[15]         : M28       : input  : 2.5 V             :         : 6         : N              
+VCCIO1                       : N1        : power  :                   : 2.5V    : 1         :                
+GND                          : N2        : gnd    :                   :         :           :                
+AVS_S0_ADDRESS[12]           : N3        : input  : 2.5 V             :         : 1         : N              
+AVS_S2_WRITEDATA[23]         : N4        : input  : 2.5 V             :         : 1         : N              
+VCCIO1                       : N5        : power  :                   : 2.5V    : 1         :                
+GND                          : N6        : gnd    :                   :         :           :                
+~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : N7        : input  : 2.5 V             :         : 1         : N              
+AVS_S1_ADDRESS[7]            : N8        : input  : 2.5 V             :         : 1         : N              
+GND                          : N9        : gnd    :                   :         :           :                
+VCCINT                       : N10       : power  :                   : 1.2V    :           :                
+GND                          : N11       : gnd    :                   :         :           :                
+VCCINT                       : N12       : power  :                   : 1.2V    :           :                
+GND                          : N13       : gnd    :                   :         :           :                
+VCCINT                       : N14       : power  :                   : 1.2V    :           :                
+GND                          : N15       : gnd    :                   :         :           :                
+VCCINT                       : N16       : power  :                   : 1.2V    :           :                
+GND                          : N17       : gnd    :                   :         :           :                
+VCCINT                       : N18       : power  :                   : 1.2V    :           :                
+GND                          : N19       : gnd    :                   :         :           :                
+VCCINT                       : N20       : power  :                   : 1.2V    :           :                
+AVM_M1_ADDRESS[10]           : N21       : output : 2.5 V             :         : 6         : N              
+MSEL0                        : N22       :        :                   :         : 6         :                
+GND                          : N23       : gnd    :                   :         :           :                
+VCCIO6                       : N24       : power  :                   : 2.5V    : 6         :                
+AVS_S2_ADDRESS[8]            : N25       : input  : 2.5 V             :         : 6         : N              
+AVS_S2_WRITEDATA[13]         : N26       : input  : 2.5 V             :         : 6         : N              
+GND                          : N27       : gnd    :                   :         :           :                
+VCCIO6                       : N28       : power  :                   : 2.5V    : 6         :                
+AVM_M1_WRITEDATA[23]         : P1        : output : 2.5 V             :         : 1         : N              
+AVS_S0_ADDRESS[9]            : P2        : input  : 2.5 V             :         : 1         : N              
+~ALTERA_DCLK~                : P3        : output : 2.5 V             :         : 1         : N              
+nCONFIG                      : P4        :        :                   :         : 1         :                
+TCK                          : P5        : input  :                   :         : 1         :                
+TDO                          : P6        : output :                   :         : 1         :                
+TDI                          : P7        : input  :                   :         : 1         :                
+TMS                          : P8        : input  :                   :         : 1         :                
+VCCINT                       : P9        : power  :                   : 1.2V    :           :                
+GND                          : P10       : gnd    :                   :         :           :                
+VCCINT                       : P11       : power  :                   : 1.2V    :           :                
+GND                          : P12       : gnd    :                   :         :           :                
+VCCINT                       : P13       : power  :                   : 1.2V    :           :                
+GND                          : P14       : gnd    :                   :         :           :                
+VCCINT                       : P15       : power  :                   : 1.2V    :           :                
+GND                          : P16       : gnd    :                   :         :           :                
+VCCINT                       : P17       : power  :                   : 1.2V    :           :                
+GND                          : P18       : gnd    :                   :         :           :                
+VCCINT                       : P19       : power  :                   : 1.2V    :           :                
+GND                          : P20       : gnd    :                   :         :           :                
+AVS_S3_ADDRESS[24]           : P21       : input  : 2.5 V             :         : 5         : N              
+MSEL3                        : P22       :        :                   :         : 6         :                
+MSEL1                        : P23       :        :                   :         : 6         :                
+CONF_DONE                    : P24       :        :                   :         : 6         :                
+AVS_S3_WRITEDATA[15]         : P25       : input  : 2.5 V             :         : 6         : N              
+AVS_S3_ADDRESS[25]           : P26       : input  : 2.5 V             :         : 6         : N              
+AVS_S0_ADDRESS[24]           : P27       : input  : 2.5 V             :         : 6         : N              
+~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : P28       : output : 2.5 V             :         : 6         : N              
+AVS_S2_ADDRESS[11]           : R1        : input  : 2.5 V             :         : 2         : N              
+AVS_S2_ADDRESS[7]            : R2        : input  : 2.5 V             :         : 2         : N              
+AVS_S0_ADDRESS[10]           : R3        : input  : 2.5 V             :         : 2         : N              
+AVS_S0_READDATA[26]          : R4        : output : 2.5 V             :         : 2         : N              
+AVS_S0_READDATA[27]          : R5        : output : 2.5 V             :         : 2         : N              
+AVM_M1_ADDRESS[9]            : R6        : output : 2.5 V             :         : 2         : N              
+AVS_S1_ADDRESS[11]           : R7        : input  : 2.5 V             :         : 2         : N              
+nCE                          : R8        :        :                   :         : 1         :                
+GND                          : R9        : gnd    :                   :         :           :                
+VCCINT                       : R10       : power  :                   : 1.2V    :           :                
+GND                          : R11       : gnd    :                   :         :           :                
+VCCINT                       : R12       : power  :                   : 1.2V    :           :                
+GND                          : R13       : gnd    :                   :         :           :                
+VCCINT                       : R14       : power  :                   : 1.2V    :           :                
+GND                          : R15       : gnd    :                   :         :           :                
+VCCINT                       : R16       : power  :                   : 1.2V    :           :                
+GND                          : R17       : gnd    :                   :         :           :                
+VCCINT                       : R18       : power  :                   : 1.2V    :           :                
+GND                          : R19       : gnd    :                   :         :           :                
+VCCINT                       : R20       : power  :                   : 1.2V    :           :                
+AVS_S2_ADDRESS[24]           : R21       : input  : 2.5 V             :         : 5         : N              
+AVS_S0_WRITEDATA[11]         : R22       : input  : 2.5 V             :         : 5         : N              
+AVS_S3_WRITEDATA[11]         : R23       : input  : 2.5 V             :         : 5         : N              
+AVS_S1_ADDRESS[25]           : R24       : input  : 2.5 V             :         : 5         : N              
+AVS_S1_WRITEDATA[1]          : R25       : input  : 2.5 V             :         : 5         : N              
+AVM_M1_ADDRESS[26]           : R26       : output : 2.5 V             :         : 5         : N              
+AVS_S1_WRITEDATA[15]         : R27       : input  : 2.5 V             :         : 5         : N              
+AVS_S0_WRITEDATA[1]          : R28       : input  : 2.5 V             :         : 5         : N              
+VCCIO2                       : T1        : power  :                   : 2.5V    : 2         :                
+GND                          : T2        : gnd    :                   :         :           :                
+AVS_S2_READDATA[28]          : T3        : output : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : T4        :        :                   :         : 2         :                
+VCCIO2                       : T5        : power  :                   : 2.5V    : 2         :                
+GND                          : T6        : gnd    :                   :         :           :                
+AVM_M1_READDATA[31]          : T7        : input  : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : T8        :        :                   :         : 2         :                
+VCCINT                       : T9        : power  :                   : 1.2V    :           :                
+GND                          : T10       : gnd    :                   :         :           :                
+VCCINT                       : T11       : power  :                   : 1.2V    :           :                
+GND                          : T12       : gnd    :                   :         :           :                
+VCCINT                       : T13       : power  :                   : 1.2V    :           :                
+GND                          : T14       : gnd    :                   :         :           :                
+VCCINT                       : T15       : power  :                   : 1.2V    :           :                
+GND                          : T16       : gnd    :                   :         :           :                
+VCCINT                       : T17       : power  :                   : 1.2V    :           :                
+GND                          : T18       : gnd    :                   :         :           :                
+VCCINT                       : T19       : power  :                   : 1.2V    :           :                
+GND                          : T20       : gnd    :                   :         :           :                
+AVM_M1_WRITEDATA[1]          : T21       : output : 2.5 V             :         : 5         : N              
+AVS_S3_WRITEDATA[1]          : T22       : input  : 2.5 V             :         : 5         : N              
+GND                          : T23       : gnd    :                   :         :           :                
+VCCIO5                       : T24       : power  :                   : 2.5V    : 5         :                
+AVS_S0_WRITEDATA[25]         : T25       : input  : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : T26       :        :                   :         : 5         :                
+GND                          : T27       : gnd    :                   :         :           :                
+VCCIO5                       : T28       : power  :                   : 2.5V    : 5         :                
+AVS_S2_READDATA[26]          : U1        : output : 2.5 V             :         : 2         : N              
+AVS_S1_READDATA[28]          : U2        : output : 2.5 V             :         : 2         : N              
+AVS_S3_ADDRESS[7]            : U3        : input  : 2.5 V             :         : 2         : N              
+AVS_S2_WRITEDATA[0]          : U4        : input  : 2.5 V             :         : 2         : N              
+AVS_S2_READDATA[31]          : U5        : output : 2.5 V             :         : 2         : N              
+AVS_S2_READDATA[27]          : U6        : output : 2.5 V             :         : 2         : N              
+AVS_S0_BYTEENABLE[3]         : U7        : input  : 2.5 V             :         : 2         : N              
+AVM_M1_ADDRESS[0]            : U8        : output : 2.5 V             :         : 2         : N              
+GND                          : U9        : gnd    :                   :         :           :                
+VCCINT                       : U10       : power  :                   : 1.2V    :           :                
+GND                          : U11       : gnd    :                   :         :           :                
+VCCINT                       : U12       : power  :                   : 1.2V    :           :                
+GND                          : U13       : gnd    :                   :         :           :                
+VCCINT                       : U14       : power  :                   : 1.2V    :           :                
+GND                          : U15       : gnd    :                   :         :           :                
+VCCINT                       : U16       : power  :                   : 1.2V    :           :                
+GND                          : U17       : gnd    :                   :         :           :                
+VCCINT                       : U18       : power  :                   : 1.2V    :           :                
+GND                          : U19       : gnd    :                   :         :           :                
+VCCINT                       : U20       : power  :                   : 1.2V    :           :                
+AVS_S0_ADDRESS[25]           : U21       : input  : 2.5 V             :         : 5         : N              
+AVS_S3_WRITEDATA[12]         : U22       : input  : 2.5 V             :         : 5         : N              
+AVS_S2_ADDRESS[25]           : U23       : input  : 2.5 V             :         : 5         : N              
+AVS_S0_WRITEDATA[14]         : U24       : input  : 2.5 V             :         : 5         : N              
+AVM_M1_WRITEDATA[27]         : U25       : output : 2.5 V             :         : 5         : N              
+AVS_S1_ADDRESS[13]           : U26       : input  : 2.5 V             :         : 5         : N              
+AVM_M1_WRITEDATA[14]         : U27       : output : 2.5 V             :         : 5         : N              
+AVS_S2_WRITEDATA[10]         : U28       : input  : 2.5 V             :         : 5         : N              
+AVS_S3_READDATA[28]          : V1        : output : 2.5 V             :         : 2         : N              
+AVS_S0_READDATA[28]          : V2        : output : 2.5 V             :         : 2         : N              
+AVS_S1_READDATA[31]          : V3        : output : 2.5 V             :         : 2         : N              
+AVS_S3_READDATA[26]          : V4        : output : 2.5 V             :         : 2         : N              
+AVS_S2_BYTEENABLE[2]         : V5        : input  : 2.5 V             :         : 2         : N              
+AVM_M1_WAITREQUEST           : V6        : input  : 2.5 V             :         : 2         : N              
+AVS_S3_BYTEENABLE[1]         : V7        : input  : 2.5 V             :         : 2         : N              
+AVS_S2_BYTEENABLE[3]         : V8        : input  : 2.5 V             :         : 2         : N              
+VCCINT                       : V9        : power  :                   : 1.2V    :           :                
+GND                          : V10       : gnd    :                   :         :           :                
+VCCINT                       : V11       : power  :                   : 1.2V    :           :                
+GND                          : V12       : gnd    :                   :         :           :                
+VCCINT                       : V13       : power  :                   : 1.2V    :           :                
+GND                          : V14       : gnd    :                   :         :           :                
+VCCINT                       : V15       : power  :                   : 1.2V    :           :                
+GND                          : V16       : gnd    :                   :         :           :                
+VCCINT                       : V17       : power  :                   : 1.2V    :           :                
+GND                          : V18       : gnd    :                   :         :           :                
+VCCINT                       : V19       : power  :                   : 1.2V    :           :                
+GND                          : V20       : gnd    :                   :         :           :                
+AVS_S1_WRITEDATA[25]         : V21       : input  : 2.5 V             :         : 5         : N              
+AVM_M1_WRITEDATA[12]         : V22       : output : 2.5 V             :         : 5         : N              
+AVS_S1_ADDRESS[23]           : V23       : input  : 2.5 V             :         : 5         : N              
+AVS_S2_WRITEDATA[27]         : V24       : input  : 2.5 V             :         : 5         : N              
+AVS_S2_ADDRESS[13]           : V25       : input  : 2.5 V             :         : 5         : N              
+AVS_S0_WRITEDATA[10]         : V26       : input  : 2.5 V             :         : 5         : N              
+AVS_S1_WRITEDATA[12]         : V27       : input  : 2.5 V             :         : 5         : N              
+AVS_S0_WRITEDATA[12]         : V28       : input  : 2.5 V             :         : 5         : N              
+AVM_M1_READDATA[27]          : W1        : input  : 2.5 V             :         : 2         : N              
+AVS_S1_READDATA[26]          : W2        : output : 2.5 V             :         : 2         : N              
+AVS_S1_BYTEENABLE[1]         : W3        : input  : 2.5 V             :         : 2         : N              
+AVM_M1_BYTEENABLE[0]         : W4        : output : 2.5 V             :         : 2         : N              
+VCCIO2                       : W5        : power  :                   : 2.5V    : 2         :                
+GND                          : W6        : gnd    :                   :         :           :                
+AVS_S2_BYTEENABLE[0]         : W7        : input  : 2.5 V             :         : 2         : N              
+AVS_S1_BYTEENABLE[3]         : W8        : input  : 2.5 V             :         : 2         : N              
+GND                          : W9        : gnd    :                   :         :           :                
+VCCINT                       : W10       : power  :                   : 1.2V    :           :                
+GND                          : W11       : gnd    :                   :         :           :                
+VCCINT                       : W12       : power  :                   : 1.2V    :           :                
+GND                          : W13       : gnd    :                   :         :           :                
+VCCINT                       : W14       : power  :                   : 1.2V    :           :                
+GND                          : W15       : gnd    :                   :         :           :                
+VCCINT                       : W16       : power  :                   : 1.2V    :           :                
+GND                          : W17       : gnd    :                   :         :           :                
+VCCINT                       : W18       : power  :                   : 1.2V    :           :                
+GND                          : W19       : gnd    :                   :         :           :                
+VCCINT                       : W20       : power  :                   : 1.2V    :           :                
+AVS_S1_WRITEDATA[14]         : W21       : input  : 2.5 V             :         : 5         : N              
+AVS_S0_ADDRESS[13]           : W22       : input  : 2.5 V             :         : 5         : N              
+GND                          : W23       : gnd    :                   :         :           :                
+VCCIO5                       : W24       : power  :                   : 2.5V    : 5         :                
+AVM_M1_WRITEDATA[10]         : W25       : output : 2.5 V             :         : 5         : N              
+AVS_S3_WRITEDATA[27]         : W26       : input  : 2.5 V             :         : 5         : N              
+AVS_S3_WRITEDATA[14]         : W27       : input  : 2.5 V             :         : 5         : N              
+AVS_S2_WRITEDATA[14]         : W28       : input  : 2.5 V             :         : 5         : N              
+AVS_S1_WRITEDATA[11]         : Y1        : input  : 2.5 V             :         : 2         : N              
+AVS_S3_WRITEDATA[10]         : Y2        : input  : 2.5 V             :         : 2         : N              
+AVS_S1_READDATA[27]          : Y3        : output : 2.5 V             :         : 2         : N              
+AVS_S0_READDATA[31]          : Y4        : output : 2.5 V             :         : 2         : N              
+AVS_S2_BYTEENABLE[1]         : Y5        : input  : 2.5 V             :         : 2         : N              
+AVS_S3_WRITEDATA[21]         : Y6        : input  : 2.5 V             :         : 2         : N              
+AVS_S0_WAITREQUEST           : Y7        : output : 2.5 V             :         : 2         : N              
+VCCA1                        : Y8        : power  :                   : 2.5V    :           :                
+VCCD_PLL1                    : Y9        : power  :                   : 1.2V    :           :                
+AVM_M1_ADDRESS[19]           : Y10       : output : 2.5 V             :         : 3         : N              
+GND                          : Y11       : gnd    :                   :         :           :                
+AVS_S0_ADDRESS[2]            : Y12       : input  : 2.5 V             :         : 3         : N              
+AVM_M1_ADDRESS[6]            : Y13       : output : 2.5 V             :         : 3         : N              
+AVS_S0_ADDRESS[5]            : Y14       : input  : 2.5 V             :         : 3         : N              
+AVS_S2_WRITEDATA[8]          : Y15       : input  : 2.5 V             :         : 3         : N              
+AVS_S1_READDATA[14]          : Y16       : output : 2.5 V             :         : 4         : N              
+AVS_S3_READDATA[12]          : Y17       : output : 2.5 V             :         : 4         : N              
+GND                          : Y18       : gnd    :                   :         :           :                
+AVM_M1_READDATA[14]          : Y19       : input  : 2.5 V             :         : 4         : N              
+VCCD_PLL4                    : Y20       : power  :                   : 1.2V    :           :                
+VCCA4                        : Y21       : power  :                   : 2.5V    :           :                
+AVS_S2_WRITEDATA[25]         : Y22       : input  : 2.5 V             :         : 5         : N              
+AVM_M1_ADDRESS[15]           : Y23       : output : 2.5 V             :         : 5         : N              
+AVS_S1_READDATA[23]          : Y24       : output : 2.5 V             :         : 5         : N              
+AVS_S0_WRITEDATA[27]         : Y25       : input  : 2.5 V             :         : 5         : N              
+AVS_S3_ADDRESS[23]           : Y26       : input  : 2.5 V             :         : 5         : N              
+AVS_S3_WRITEDATA[9]          : Y27       : input  : 2.5 V             :         : 5         : N              
+AVS_S0_WRITEDATA[9]          : Y28       : input  : 2.5 V             :         : 5         : N              

@@ -1,0 +1,36 @@
+
+library IEEE;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+
+entity traffic_generator is
+  generic (SLAVE_ADDR_WIDTH : integer := 26;
+           DATA_WIDTH : integer := 32;
+		       MASTER_ADDR_WIDTH : integer := 28;
+		       BYTE_ENABLE_BITS  : integer := 4;
+		       BURST_COUNT_BITS : integer := 4;
+		       BURST_LENGTH     : integer := 8;
+		       NUM_OF_MASTERS   : integer := 4);
+  port (
+  iCLOCK : in std_logic;
+  iRESET : in std_logic;
+
+  
+  -- Avalon Master:
+  -- MASTER interface
+  MASTER_ADDRES_AVM             : OUT STD_LOGIC_VECTOR((MASTER_ADDR_WIDTH - 1) DOWNTO 0) := (others => '0'); --because of the byte addresibility
+  MASTER_READ_AVM               : OUT STD_LOGIC := '0';
+  MASTER_WRITE_AVM              : OUT STD_LOGIC := '0';
+  MASTER_WRITEDATA_AVM          : OUT STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0) := (others => '0');
+  MASTER_BYTEENABLE_AVM         : OUT std_logic_vector((BYTE_ENABLE_BITS - 1) downto 0) := (others => '0');
+  
+  MASTER_READ_DATA_AVM          : IN  STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
+  MASTER_WAITREQUEST_AVM        : IN  STD_LOGIC;
+  MASTER_READDATAVALID_AVM      : IN  STD_LOGIC
+   );
+end entity;
+
+architecture behave of traffic_generator is
+  
+end architecture;

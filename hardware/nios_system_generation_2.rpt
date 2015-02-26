@@ -1,0 +1,315 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: ip-generate --project-directory=C:/Projects/Car2X-master-new/hardware/ --output-directory=C:/Projects/Car2X-master-new/hardware/nios_system/ --report-file=bsf:C:/Projects/Car2X-master-new/hardware/nios_system.bsf --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE115F29C7 --system-info=DEVICE_SPEEDGRADE=7 --component-file=C:/Projects/Car2X-master-new/hardware/nios_system.qsys
+Progress: Loading hardware/nios_system.qsys
+Progress: Reading input file
+Progress: Adding sys_clk [clock_source 12.1]
+Progress: Parameterizing module sys_clk
+Progress: Adding com_nios [altera_nios2_qsys 12.1]
+Progress: Parameterizing module com_nios
+Progress: Adding jtaguart_0 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtaguart_0
+Progress: Adding carControl_nios [altera_nios2_qsys 12.1]
+Progress: Parameterizing module carControl_nios
+Progress: Adding shared_memory [altera_avalon_onchip_memory2 12.1]
+Progress: Parameterizing module shared_memory
+Progress: Adding shared_memory_mutex [altera_avalon_mutex 12.1]
+Progress: Parameterizing module shared_memory_mutex
+Progress: Adding com_timer [altera_avalon_timer 12.1]
+Progress: Parameterizing module com_timer
+Progress: Adding com_memory [altera_avalon_new_sdram_controller 12.1]
+Progress: Parameterizing module com_memory
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 12.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding ethernet_subsystem [ethernet_system 1.0]
+Progress: Parameterizing module ethernet_subsystem
+Progress: Adding jtaguart_1 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtaguart_1
+Progress: Adding prio_arbiter_0 [prio_arbiter 1.2]
+Progress: Parameterizing module prio_arbiter_0
+Progress: Adding traffic_gen_0 [traffic_gen 0]
+Progress: Parameterizing module traffic_gen_0
+Progress: Adding traffic_gen_1 [traffic_gen 0]
+Progress: Parameterizing module traffic_gen_1
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: nios_system.shared_memory: Memory will be initialized from shared_memory.hex
+Info: nios_system.onchip_memory2_0: Memory will be initialized from onchip_memory2_0.hex
+Info: nios_system.ethernet_subsystem.tse_mac: Please apply the Quartus II and TimeQuest SDC constraints as mentioned in user guide
+Info: nios_system.ethernet_subsystem.descriptor_memory: Memory will be initialized from descriptor_memory.hex
+Warning: nios_system.traffic_gen_0: traffic_gen_0.conduit_end must be exported, or connected to a matching conduit.
+Warning: nios_system.traffic_gen_1: traffic_gen_1.conduit_end must be exported, or connected to a matching conduit.
+Info: ip-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: ip-generate --project-directory=C:/Projects/Car2X-master-new/hardware/ --output-directory=C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/ --file-set=QUARTUS_SYNTH --report-file=sopcinfo:C:/Projects/Car2X-master-new/hardware/nios_system.sopcinfo --report-file=html:C:/Projects/Car2X-master-new/hardware/nios_system.html --report-file=qip:C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/nios_system.qip --report-file=cmp:C:/Projects/Car2X-master-new/hardware/nios_system.cmp --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE115F29C7 --system-info=DEVICE_SPEEDGRADE=7 --component-file=C:/Projects/Car2X-master-new/hardware/nios_system.qsys
+Progress: Loading hardware/nios_system.qsys
+Progress: Reading input file
+Progress: Adding sys_clk [clock_source 12.1]
+Progress: Parameterizing module sys_clk
+Progress: Adding com_nios [altera_nios2_qsys 12.1]
+Progress: Parameterizing module com_nios
+Progress: Adding jtaguart_0 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtaguart_0
+Progress: Adding carControl_nios [altera_nios2_qsys 12.1]
+Progress: Parameterizing module carControl_nios
+Progress: Adding shared_memory [altera_avalon_onchip_memory2 12.1]
+Progress: Parameterizing module shared_memory
+Progress: Adding shared_memory_mutex [altera_avalon_mutex 12.1]
+Progress: Parameterizing module shared_memory_mutex
+Progress: Adding com_timer [altera_avalon_timer 12.1]
+Progress: Parameterizing module com_timer
+Progress: Adding com_memory [altera_avalon_new_sdram_controller 12.1]
+Progress: Parameterizing module com_memory
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 12.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding ethernet_subsystem [ethernet_system 1.0]
+Progress: Parameterizing module ethernet_subsystem
+Progress: Adding jtaguart_1 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtaguart_1
+Progress: Adding prio_arbiter_0 [prio_arbiter 1.2]
+Progress: Parameterizing module prio_arbiter_0
+Progress: Adding traffic_gen_0 [traffic_gen 0]
+Progress: Parameterizing module traffic_gen_0
+Progress: Adding traffic_gen_1 [traffic_gen 0]
+Progress: Parameterizing module traffic_gen_1
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: nios_system.shared_memory: Memory will be initialized from shared_memory.hex
+Info: nios_system.onchip_memory2_0: Memory will be initialized from onchip_memory2_0.hex
+Info: nios_system.ethernet_subsystem.tse_mac: Please apply the Quartus II and TimeQuest SDC constraints as mentioned in user guide
+Info: nios_system.ethernet_subsystem.descriptor_memory: Memory will be initialized from descriptor_memory.hex
+Warning: nios_system.traffic_gen_0: traffic_gen_0.conduit_end must be exported, or connected to a matching conduit.
+Warning: nios_system.traffic_gen_1: traffic_gen_1.conduit_end must be exported, or connected to a matching conduit.
+Info: nios_system: Generating nios_system "nios_system" for QUARTUS_SYNTH
+Info: pipeline_bridge_swap_transform: After transform: 14 modules, 74 connections
+Info: No custom instruction connections, skipping transform 
+Info: merlin_translator_transform: After transform: 38 modules, 183 connections
+Info: merlin_domain_transform: After transform: 77 modules, 473 connections
+Info: merlin_router_transform: After transform: 99 modules, 572 connections
+Info: merlin_traffic_limiter_transform: After transform: 102 modules, 590 connections
+Info: merlin_burst_transform: After transform: 112 modules, 635 connections
+Info: reset_adaptation_transform: After transform: 115 modules, 445 connections
+Info: merlin_network_to_switch_transform: After transform: 156 modules, 531 connections
+Info: limiter_update_transform: After transform: 156 modules, 534 connections
+Info: merlin_interrupt_mapper_transform: After transform: 158 modules, 540 connections
+Info: com_nios: Starting RTL generation for module 'nios_system_com_nios'
+Info: com_nios:   Generation command is [exec C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/eperl.exe -I C:/altera/12.1/quartus/common/ip/altera/common/perl/5.8.3 -I C:/altera/12.1/quartus/sopc_builder/bin/europa -I C:/altera/12.1/quartus/sopc_builder/bin/perl_lib -I C:/altera/12.1/quartus/sopc_builder/bin -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/cpu_lib -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/nios_lib -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2 -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2 -- C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/generate_rtl.epl --name=nios_system_com_nios --dir=C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0049_com_nios_gen/ --quartus_dir=C:/altera/12.1/quartus --verilog --config=C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0049_com_nios_gen//nios_system_com_nios_processor_configuration.pl  --do_build_sim=0    --bogus  ]
+Info: com_nios: # 2015.02.11 16:37:14 (*) Starting Nios II generation
+Info: com_nios: # 2015.02.11 16:37:14 (*)   Checking for plaintext license.
+Info: com_nios: # 2015.02.11 16:37:16 (*)   Plaintext license not found.
+Info: com_nios: # 2015.02.11 16:37:16 (*)   Checking for encrypted license (non-evaluation).
+Info: com_nios: # 2015.02.11 16:37:17 (*)   Encrypted license found.  SOF will not be time-limited.
+Info: com_nios: # 2015.02.11 16:37:17 (*)   Elaborating CPU configuration settings
+Info: com_nios: # 2015.02.11 16:37:17 (*)   Creating all objects for CPU
+Info: com_nios: # 2015.02.11 16:37:17 (*)     Testbench
+Info: com_nios: # 2015.02.11 16:37:18 (*)     Instruction decoding
+Info: com_nios: # 2015.02.11 16:37:18 (*)       Instruction fields
+Info: com_nios: # 2015.02.11 16:37:18 (*)       Instruction decodes
+Info: com_nios: # 2015.02.11 16:37:18 (*)       Signals for RTL simulation waveforms
+Info: com_nios: # 2015.02.11 16:37:18 (*)       Instruction controls
+Info: com_nios: # 2015.02.11 16:37:18 (*)     Pipeline frontend
+Info: com_nios: # 2015.02.11 16:37:19 (*)     Pipeline backend
+Info: com_nios: # 2015.02.11 16:37:22 (*)   Generating RTL from CPU objects
+Info: com_nios: # 2015.02.11 16:37:26 (*)   Creating encrypted RTL
+Info: com_nios: # 2015.02.11 16:37:27 (*) Done Nios II generation
+Info: com_nios: Done RTL generation for module 'nios_system_com_nios'
+Info: com_nios: "nios_system" instantiated altera_nios2_qsys "com_nios"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0050_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0050_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0050_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0050_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0050_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:37:40 (*) Success: sopc_builder finished.
+Info: jtaguart_0: "nios_system" instantiated altera_avalon_jtag_uart "jtaguart_0"
+Info: carControl_nios: Starting RTL generation for module 'nios_system_carControl_nios'
+Info: carControl_nios:   Generation command is [exec C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/eperl.exe -I C:/altera/12.1/quartus/common/ip/altera/common/perl/5.8.3 -I C:/altera/12.1/quartus/sopc_builder/bin/europa -I C:/altera/12.1/quartus/sopc_builder/bin/perl_lib -I C:/altera/12.1/quartus/sopc_builder/bin -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/cpu_lib -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/nios_lib -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2 -I C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2 -- C:/altera/12.1/quartus/../ip/altera/nios2_ip/altera_nios2/generate_rtl.epl --name=nios_system_carControl_nios --dir=C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0051_carControl_nios_gen/ --quartus_dir=C:/altera/12.1/quartus --verilog --config=C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0051_carControl_nios_gen//nios_system_carControl_nios_processor_configuration.pl  --do_build_sim=0    --bogus  ]
+Info: carControl_nios: # 2015.02.11 16:37:41 (*) Starting Nios II generation
+Info: carControl_nios: # 2015.02.11 16:37:41 (*)   Checking for plaintext license.
+Info: carControl_nios: # 2015.02.11 16:37:42 (*)   Plaintext license not found.
+Info: carControl_nios: # 2015.02.11 16:37:42 (*)   Checking for encrypted license (non-evaluation).
+Info: carControl_nios: # 2015.02.11 16:37:42 (*)   Encrypted license found.  SOF will not be time-limited.
+Info: carControl_nios: # 2015.02.11 16:37:42 (*)   Elaborating CPU configuration settings
+Info: carControl_nios: # 2015.02.11 16:37:42 (*)   Creating all objects for CPU
+Info: carControl_nios: # 2015.02.11 16:37:43 (*)     Pipeline frontend
+Info: carControl_nios: # 2015.02.11 16:37:45 (*)   Generating RTL from CPU objects
+Info: carControl_nios: # 2015.02.11 16:37:49 (*)   Creating encrypted RTL
+Info: carControl_nios: # 2015.02.11 16:37:50 (*) Done Nios II generation
+Info: carControl_nios: Done RTL generation for module 'nios_system_carControl_nios'
+Info: carControl_nios: "nios_system" instantiated altera_nios2_qsys "carControl_nios"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0052_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0052_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0052_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0052_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0052_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:37:57 (*) Success: sopc_builder finished.
+Info: shared_memory: "nios_system" instantiated altera_avalon_onchip_memory2 "shared_memory"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0053_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0053_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0053_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0053_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0053_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:38:05 (*) Success: sopc_builder finished.
+Info: shared_memory_mutex: "nios_system" instantiated altera_avalon_mutex "shared_memory_mutex"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0054_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0054_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0054_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0054_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0054_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:38:12 (*) Success: sopc_builder finished.
+Info: com_timer: "nios_system" instantiated altera_avalon_timer "com_timer"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0055_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0055_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0055_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0055_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0055_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+.
+# 2015.02.11 16:38:20 (*) Running Test Generator Program for nios_system_com_memory
+# 2015.02.11 16:38:21 (*) Success: sopc_builder finished.
+Info: com_memory: "nios_system" instantiated altera_avalon_new_sdram_controller "com_memory"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0056_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0056_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0056_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0056_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0056_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:38:30 (*) Success: sopc_builder finished.
+Info: onchip_memory2_0: "nios_system" instantiated altera_avalon_onchip_memory2 "onchip_memory2_0"
+Info: pipeline_bridge_swap_transform: After transform: 6 modules, 23 connections
+Info: No custom instruction connections, skipping transform 
+Info: merlin_translator_transform: After transform: 15 modules, 50 connections
+Info: merlin_domain_transform: After transform: 30 modules, 126 connections
+Info: merlin_router_transform: After transform: 39 modules, 153 connections
+Info: merlin_traffic_limiter_transform: After transform: 40 modules, 157 connections
+Info: reset_adaptation_transform: After transform: 41 modules, 159 connections
+Info: merlin_network_to_switch_transform: After transform: 57 modules, 191 connections
+Info: limiter_update_transform: After transform: 57 modules, 192 connections
+Info: ethernet_subsystem: "nios_system" instantiated ethernet_system "ethernet_subsystem"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0057_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0057_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0057_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0057_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0057_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:38:40 (*) Success: sopc_builder finished.
+Info: jtaguart_1: "nios_system" instantiated altera_avalon_jtag_uart "jtaguart_1"
+Info: prio_arbiter_0: "nios_system" instantiated prio_arbiter "prio_arbiter_0"
+Info: traffic_gen_0: "nios_system" instantiated traffic_gen "traffic_gen_0"
+Info: com_nios_instruction_master_translator: "nios_system" instantiated altera_merlin_master_translator "com_nios_instruction_master_translator"
+Info: com_nios_jtag_debug_module_translator: "nios_system" instantiated altera_merlin_slave_translator "com_nios_jtag_debug_module_translator"
+Info: com_nios_instruction_master_translator_avalon_universal_master_0_agent: "nios_system" instantiated altera_merlin_master_agent "com_nios_instruction_master_translator_avalon_universal_master_0_agent"
+Info: com_nios_jtag_debug_module_translator_avalon_universal_slave_0_agent: "nios_system" instantiated altera_merlin_slave_agent "com_nios_jtag_debug_module_translator_avalon_universal_slave_0_agent"
+Info: com_nios_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo: "nios_system" instantiated altera_avalon_sc_fifo "com_nios_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo"
+Info: addr_router: "nios_system" instantiated altera_merlin_router "addr_router"
+Info: addr_router_001: "nios_system" instantiated altera_merlin_router "addr_router_001"
+Info: addr_router_002: "nios_system" instantiated altera_merlin_router "addr_router_002"
+Info: addr_router_003: "nios_system" instantiated altera_merlin_router "addr_router_003"
+Info: addr_router_004: "nios_system" instantiated altera_merlin_router "addr_router_004"
+Info: id_router: "nios_system" instantiated altera_merlin_router "id_router"
+Info: id_router_001: "nios_system" instantiated altera_merlin_router "id_router_001"
+Info: id_router_002: "nios_system" instantiated altera_merlin_router "id_router_002"
+Info: id_router_003: "nios_system" instantiated altera_merlin_router "id_router_003"
+Info: id_router_008: "nios_system" instantiated altera_merlin_router "id_router_008"
+Info: id_router_010: "nios_system" instantiated altera_merlin_router "id_router_010"
+Info: addr_router_006: "nios_system" instantiated altera_merlin_router "addr_router_006"
+Info: id_router_012: "nios_system" instantiated altera_merlin_router "id_router_012"
+Info: limiter: "nios_system" instantiated altera_merlin_traffic_limiter "limiter"
+Info: burst_adapter: "nios_system" instantiated altera_merlin_burst_adapter "burst_adapter"
+Info: rst_controller: "nios_system" instantiated altera_reset_controller "rst_controller"
+Info: cmd_xbar_demux: "nios_system" instantiated altera_merlin_demultiplexer "cmd_xbar_demux"
+Info: cmd_xbar_demux_001: "nios_system" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_001"
+Info: cmd_xbar_demux_002: "nios_system" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_002"
+Info: cmd_xbar_demux_004: "nios_system" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_004"
+Info: cmd_xbar_mux: "nios_system" instantiated altera_merlin_multiplexer "cmd_xbar_mux"
+Info: cmd_xbar_mux_001: "nios_system" instantiated altera_merlin_multiplexer "cmd_xbar_mux_001"
+Info: Reusing file C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_xbar_demux: "nios_system" instantiated altera_merlin_demultiplexer "rsp_xbar_demux"
+Info: rsp_xbar_demux_001: "nios_system" instantiated altera_merlin_demultiplexer "rsp_xbar_demux_001"
+Info: rsp_xbar_mux: "nios_system" instantiated altera_merlin_multiplexer "rsp_xbar_mux"
+Info: Reusing file C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_xbar_mux_001: "nios_system" instantiated altera_merlin_multiplexer "rsp_xbar_mux_001"
+Info: Reusing file C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_xbar_mux_002: "nios_system" instantiated altera_merlin_multiplexer "rsp_xbar_mux_002"
+Info: Reusing file C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: cmd_xbar_demux_006: "nios_system" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_006"
+Info: irq_mapper: "nios_system" instantiated altera_irq_mapper "irq_mapper"
+Info: irq_mapper_001: "nios_system" instantiated altera_irq_mapper "irq_mapper_001"
+Info: ethernet_bridge: "ethernet_subsystem" instantiated altera_avalon_mm_bridge "ethernet_bridge"
+Info: tse_mac: Preparing to generate...
+Info: tse_mac: Variation name : nios_system_ethernet_subsystem_tse_mac
+Info: tse_mac: Variation language : Verilog HDL
+Info: tse_mac: Output directory : C:\Users\RIDDHI~1\AppData\Local\Temp\alt6477_5892615927493649245.dir\0090_iptb_gen
+Info: tse_mac: Generating HDL... 
+Info: tse_mac: Generating QIP file ...
+Info: tse_mac: Updating user's project directory...
+Info: tse_mac: HDL generated
+Info: tse_mac: Generation successful.
+Info: tse_mac: "ethernet_subsystem" instantiated triple_speed_ethernet "tse_mac"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0091_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0091_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0091_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0091_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0091_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:39:30 (*) Success: sopc_builder finished.
+Info: sgdma_rx: "ethernet_subsystem" instantiated altera_avalon_sgdma "sgdma_rx"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0092_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0092_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0092_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0092_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0092_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2015.02.11 16:39:40 (*) Success: sopc_builder finished.
+Info: sgdma_tx: "ethernet_subsystem" instantiated altera_avalon_sgdma "sgdma_tx"
+Info: Starting classic module elaboration.
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0093_sopclgen  --no_splash --refresh C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0093_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0093_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0093_sopclgen  --generate C:/Users/RIDDHI~1/AppData/Local/Temp/alt6477_5892615927493649245.dir/0093_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+..
+# 2015.02.11 16:39:50 (*) Success: sopc_builder finished.
+Info: descriptor_memory: "ethernet_subsystem" instantiated altera_avalon_onchip_memory2 "descriptor_memory"
+Info: addr_router: "ethernet_subsystem" instantiated altera_merlin_router "addr_router"
+Info: id_router: "ethernet_subsystem" instantiated altera_merlin_router "id_router"
+Info: addr_router_001: "ethernet_subsystem" instantiated altera_merlin_router "addr_router_001"
+Info: id_router_003: "ethernet_subsystem" instantiated altera_merlin_router "id_router_003"
+Info: cmd_xbar_demux: "ethernet_subsystem" instantiated altera_merlin_demultiplexer "cmd_xbar_demux"
+Info: rsp_xbar_demux: "ethernet_subsystem" instantiated altera_merlin_demultiplexer "rsp_xbar_demux"
+Info: rsp_xbar_mux: "ethernet_subsystem" instantiated altera_merlin_multiplexer "rsp_xbar_mux"
+Info: Reusing file C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: cmd_xbar_demux_001: "ethernet_subsystem" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_001"
+Info: cmd_xbar_mux_003: "ethernet_subsystem" instantiated altera_merlin_multiplexer "cmd_xbar_mux_003"
+Info: Reusing file C:/Projects/Car2X-master-new/hardware/nios_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_xbar_demux_003: "ethernet_subsystem" instantiated altera_merlin_demultiplexer "rsp_xbar_demux_003"
+Info: nios_system: Done nios_system" with 63 modules, 453 files, 12364471 bytes
+Info: ip-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
